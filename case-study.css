@@ -1,0 +1,415 @@
+/* ============================================================
+   theznprojects — case-study.css
+   Extends work.css for individual case study pages.
+   Covers: TL;DR block, narrative prose, flexible section
+   variants (Systems / UX / LD), image gallery, reflection.
+   ============================================================ */
+
+/* ── Page header (overrides work.css page-header) ───────────── */
+.cs-page-header {
+  padding: 120px 0 0;
+  background: var(--warm);
+  position: relative; overflow: hidden;
+}
+.cs-page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.35; pointer-events: none;
+}
+.cs-page-header-inner {
+  position: relative; z-index: 1;
+  padding-bottom: 0;
+}
+
+.cs-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; font-weight: 700; color: var(--muted);
+  margin-bottom: 28px; transition: color var(--t);
+}
+.cs-back::before { content: '←'; }
+.cs-back:hover   { color: var(--blue); }
+
+.cs-header-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+
+.cs-title {
+  font-family: var(--display); font-style: italic; font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05;
+  letter-spacing: -0.03em; color: var(--ink);
+  margin-bottom: 16px;
+  font-variation-settings: 'opsz' 144;
+}
+.cs-subtitle {
+  font-size: 1.1rem; color: var(--muted); line-height: 1.7;
+  max-width: 640px; margin-bottom: 0;
+}
+
+/* ── TL;DR block ────────────────────────────────────────────── */
+/* Sits between the header and the body — full bleed warm bg */
+.cs-tldr {
+  background: var(--warm);
+  padding: 40px 0 56px;
+  border-bottom: 1px solid var(--border);
+}
+.cs-tldr-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.cs-tldr-cell {
+  background: var(--white);
+  padding: 22px 24px;
+}
+.cs-tldr-cell:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+.cs-tldr-cell:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+.cs-tldr-label {
+  font-size: 0.67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--blue); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.cs-tldr-label::before {
+  content: ''; display: inline-block;
+  width: 10px; height: 1.5px; background: var(--blue);
+}
+.cs-tldr-val {
+  font-size: 0.92rem; font-weight: 700; color: var(--ink);
+  line-height: 1.45;
+}
+
+/* ── Case study body ────────────────────────────────────────── */
+.cs-body { padding: 72px 0 96px; background: var(--white); }
+.cs-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 72px; align-items: start;
+}
+
+/* ── Narrative prose ────────────────────────────────────────── */
+.cs-narrative h2 {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem); color: var(--ink);
+  margin: 56px 0 16px; line-height: 1.2; letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 72;
+}
+.cs-narrative h2:first-child { margin-top: 0; }
+.cs-narrative h3 {
+  font-family: var(--display); font-weight: 700;
+  font-size: 1.15rem; color: var(--ink);
+  margin: 36px 0 10px; line-height: 1.3;
+  font-variation-settings: 'opsz' 36;
+}
+.cs-narrative p {
+  font-size: 1.02rem; color: var(--ink-2);
+  line-height: 1.85; margin-bottom: 20px;
+}
+.cs-narrative ul, .cs-narrative ol {
+  padding-left: 1.3rem; margin-bottom: 20px;
+}
+.cs-narrative li {
+  font-size: 1.02rem; color: var(--ink-2);
+  line-height: 1.75; margin-bottom: 8px;
+}
+.cs-narrative strong { color: var(--ink); }
+.cs-narrative em     { font-style: italic; }
+.cs-narrative a      { color: var(--blue); border-bottom: 1px solid var(--blue-mid); transition: border-color var(--t); }
+.cs-narrative a:hover { border-color: var(--blue); }
+.cs-narrative hr     { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
+
+.cs-narrative blockquote {
+  border-left: 3px solid var(--blue);
+  padding: 4px 0 4px 24px; margin: 32px 0;
+}
+.cs-narrative blockquote p {
+  font-family: var(--display); font-style: italic;
+  font-size: 1.2rem; color: var(--ink); margin: 0; line-height: 1.6;
+  font-variation-settings: 'opsz' 36;
+}
+
+/* ── Callout variants ───────────────────────────────────────── */
+.cs-callout {
+  background: var(--blue-lt); border-left: 3px solid var(--blue);
+  padding: 18px 22px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin: 28px 0;
+}
+.cs-callout p { font-size: 0.94rem; color: var(--blue-dk); margin: 0; line-height: 1.65; }
+
+.cs-callout.insight {
+  background: #f0fdf4; border-left-color: #16a34a;
+}
+.cs-callout.insight p { color: #15803d; }
+
+.cs-callout.challenge {
+  background: #fff7ed; border-left-color: #ea580c;
+}
+.cs-callout.challenge p { color: #c2410c; }
+
+/* ── Image components ───────────────────────────────────────── */
+.cs-img {
+  width: 100%; border-radius: var(--radius-md);
+  border: 1px solid var(--border); margin: 32px 0;
+  display: block; background: var(--warm);
+}
+.cs-img-placeholder {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--blue-lt);
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--blue-mid);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 32px 0; gap: 8px;
+}
+.cs-img-placeholder .cip-label {
+  font-size: 0.78rem; color: var(--muted); font-style: italic;
+}
+.cs-img-placeholder .cip-hint {
+  font-size: 0.7rem; color: var(--blue-mid);
+}
+.cs-img-caption {
+  font-size: 0.78rem; color: var(--muted); font-style: italic;
+  text-align: center; margin-top: -24px; margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+/* Two-up image comparison */
+.cs-img-pair {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin: 32px 0;
+}
+.cs-img-pair figure { margin: 0; }
+.cs-img-pair figcaption {
+  font-size: 0.74rem; color: var(--muted); text-align: center;
+  margin-top: 8px; font-style: italic;
+}
+
+/* ── Flexible section variants ──────────────────────────────── */
+
+/* Systems variant — architecture / tech decisions */
+.cs-section-sys {
+  background: var(--warm); border-radius: var(--radius-md);
+  border: 1px solid var(--border); padding: 28px 32px;
+  margin: 36px 0;
+}
+.cs-section-sys-label {
+  font-size: 0.67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: #5B3AC4; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cs-section-sys-label::before {
+  content: ''; width: 14px; height: 1.5px;
+  background: #5B3AC4; display: inline-block;
+}
+.cs-section-sys h3 {
+  font-family: var(--display); font-weight: 700; font-size: 1.1rem;
+  color: var(--ink); margin-bottom: 10px;
+  font-variation-settings: 'opsz' 36;
+}
+.cs-section-sys p { font-size: 0.9rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 12px; }
+.cs-section-sys p:last-child { margin-bottom: 0; }
+.cs-tech-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.cs-tech-tag {
+  font-size: 0.74rem; font-weight: 700; padding: 4px 12px;
+  background: #F3F0FF; color: #5B3AC4; border-radius: 20px;
+}
+
+/* UX variant — research / process */
+.cs-section-ux {
+  background: var(--blue-lt); border-radius: var(--radius-md);
+  border: 1px solid var(--blue-mid); padding: 28px 32px;
+  margin: 36px 0;
+}
+.cs-section-ux-label {
+  font-size: 0.67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--blue); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cs-section-ux-label::before {
+  content: ''; width: 14px; height: 1.5px;
+  background: var(--blue); display: inline-block;
+}
+.cs-section-ux h3 { font-family: var(--display); font-weight: 700; font-size: 1.1rem; color: var(--ink); margin-bottom: 10px; font-variation-settings: 'opsz' 36; }
+.cs-section-ux p  { font-size: 0.9rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 12px; }
+.cs-section-ux p:last-child { margin-bottom: 0; }
+
+/* LD variant — instructional design rationale */
+.cs-section-ld {
+  background: #f0fdf4; border-radius: var(--radius-md);
+  border: 1px solid #bbf7d0; padding: 28px 32px;
+  margin: 36px 0;
+}
+.cs-section-ld-label {
+  font-size: 0.67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: #16a34a; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cs-section-ld-label::before {
+  content: ''; width: 14px; height: 1.5px;
+  background: #16a34a; display: inline-block;
+}
+.cs-section-ld h3 { font-family: var(--display); font-weight: 700; font-size: 1.1rem; color: var(--ink); margin-bottom: 10px; font-variation-settings: 'opsz' 36; }
+.cs-section-ld p  { font-size: 0.9rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 12px; }
+.cs-section-ld p:last-child { margin-bottom: 0; }
+
+/* ── Process steps ──────────────────────────────────────────── */
+.cs-steps { display: flex; flex-direction: column; gap: 0; margin: 28px 0; }
+.cs-step {
+  display: grid; grid-template-columns: 48px 1fr;
+  gap: 20px; padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.cs-step:first-child { border-top: 1px solid var(--border); }
+.cs-step-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--blue-lt); border: 1.5px solid var(--blue-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 800; color: var(--blue);
+  flex-shrink: 0; margin-top: 2px;
+}
+.cs-step-content h4 {
+  font-size: 0.92rem; font-weight: 700; color: var(--ink);
+  margin-bottom: 5px;
+}
+.cs-step-content p {
+  font-size: 0.86rem; color: var(--muted); line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Outcomes / impact block ────────────────────────────────── */
+.cs-outcomes {
+  background: var(--ink); border-radius: var(--radius-md);
+  padding: 32px 36px; margin: 36px 0;
+}
+.cs-outcomes-label {
+  font-size: 0.67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--blue-mid); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cs-outcomes-label::before {
+  content: ''; width: 14px; height: 1.5px;
+  background: var(--blue-mid); display: inline-block;
+}
+.cs-outcomes-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+.cs-outcome-stat {}
+.cs-outcome-val {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--white);
+  line-height: 1; margin-bottom: 6px;
+  font-variation-settings: 'opsz' 72;
+}
+.cs-outcome-label {
+  font-size: 0.78rem; color: rgba(255,255,255,0.45); line-height: 1.4;
+}
+
+/* ── Reflection block ───────────────────────────────────────── */
+.cs-reflection {
+  background: var(--warm); border-radius: var(--radius-md);
+  border: 1px solid var(--border); padding: 32px 36px; margin: 36px 0;
+}
+.cs-reflection-label {
+  font-size: 0.67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cs-reflection-label::before {
+  content: ''; width: 14px; height: 1.5px;
+  background: var(--muted); display: inline-block;
+}
+.cs-reflection p {
+  font-size: 0.96rem; color: var(--ink-2); line-height: 1.8; margin-bottom: 14px;
+}
+.cs-reflection p:last-child { margin-bottom: 0; }
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.cs-sidebar { position: sticky; top: 80px; }
+.cs-sidebar-block { margin-bottom: 28px; }
+.cs-sidebar-block h3 {
+  font-size: 0.67rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px;
+}
+.cs-sidebar-block p { font-size: 0.84rem; color: var(--ink-2); line-height: 1.6; }
+
+/* Sidebar quick facts */
+.cs-sidebar-facts { display: flex; flex-direction: column; }
+.cs-sf-row {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 11px 0; border-bottom: 1px solid var(--border);
+}
+.cs-sf-row:first-child { border-top: 1px solid var(--border); }
+.cs-sf-label { font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.cs-sf-val   { font-size: 0.84rem; font-weight: 700; color: var(--ink); line-height: 1.4; }
+.cs-sf-val a { color: var(--blue); }
+.cs-sf-val a:hover { text-decoration: underline; }
+
+/* Sidebar TOC */
+.cs-toc { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.cs-toc a {
+  font-size: 0.82rem; color: var(--muted);
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid var(--border);
+  display: block; transition: all var(--t); line-height: 1.4;
+}
+.cs-toc a:hover  { color: var(--blue); border-left-color: var(--blue-mid); padding-left: 16px; }
+.cs-toc a.active { color: var(--blue); border-left-color: var(--blue); font-weight: 700; }
+.cs-toc .toc-sub a { font-size: 0.76rem; padding-left: 20px; }
+.cs-toc .toc-sub a:hover  { padding-left: 24px; }
+
+/* Sidebar tool tags */
+.cs-tool-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.cs-tool-tag {
+  font-size: 0.74rem; padding: 3px 10px;
+  border: 1px solid var(--border); border-radius: 20px; color: var(--muted);
+  transition: all var(--t);
+}
+.cs-tool-tag:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ── Case study nav (prev/next) ─────────────────────────────── */
+.cs-nav {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px; margin-top: 56px; padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.cs-nav-item { display: flex; flex-direction: column; gap: 6px; }
+.cs-nav-item.next { text-align: right; }
+.cs-nav-dir {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted);
+}
+.cs-nav-title {
+  font-family: var(--display); font-weight: 700; font-size: 0.96rem;
+  color: var(--ink); line-height: 1.3; transition: color var(--t);
+  font-variation-settings: 'opsz' 36;
+}
+.cs-nav-item a:hover .cs-nav-title { color: var(--blue); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .cs-tldr-grid { grid-template-columns: repeat(2, 1fr); }
+  .cs-tldr-cell:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+  .cs-tldr-cell:last-child  { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+}
+@media (max-width: 900px) {
+  .cs-layout  { grid-template-columns: 1fr; gap: 48px; }
+  .cs-sidebar { position: static; }
+  .cs-img-pair { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .cs-page-header       { padding-top: 100px; }
+  .cs-body              { padding: 48px 0 72px; }
+  .cs-tldr              { padding: 32px 0 40px; }
+  .cs-tldr-grid         { grid-template-columns: 1fr 1fr; gap: 1px; }
+  .cs-outcomes-grid     { grid-template-columns: repeat(2, 1fr); }
+  .cs-nav               { grid-template-columns: 1fr; }
+  .cs-nav-item.next     { text-align: left; }
+  .cs-reflection, .cs-outcomes, .cs-section-sys,
+  .cs-section-ux, .cs-section-ld { padding: 22px 20px; }
+}
