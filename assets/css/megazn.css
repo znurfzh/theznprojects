@@ -1,0 +1,416 @@
+/* ============================================================
+   theznprojects — megazn.css
+   Styles for /megazn (index) and /megazn/[slug] (post pages).
+   All megaZN pages are dark: background var(--ink) throughout.
+   ============================================================ */
+
+/* ─────────────────────────────────────────────────────────────
+   megaZN INDEX
+   ─────────────────────────────────────────────────────────────*/
+
+#megazn-header {
+  background: var(--ink);
+  padding: 140px 0 80px;
+}
+
+.megazn-header-inner { max-width: 680px; }
+
+.megazn-eyebrow {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.megazn-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 18px; height: 1.5px; background: var(--blue);
+}
+
+.megazn-page-title {
+  font-family: var(--display); font-style: italic; font-weight: 800;
+  font-size: clamp(2.8rem, 6vw, 4.8rem); line-height: 1.05;
+  letter-spacing: -0.03em; color: var(--white);
+  margin-bottom: 24px;
+  font-variation-settings: 'opsz' 72;
+}
+
+.megazn-page-sub {
+  font-size: 1.05rem; color: rgba(255,255,255,0.5);
+  line-height: 1.75; max-width: 560px;
+}
+
+/* ── Topic filter bar ────────────────────────────────────────*/
+#topic-bar {
+  position: sticky; top: 60px; z-index: 100;
+  background: rgba(28,28,28,0.97);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+}
+
+.topic-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center;
+  overflow-x: auto; scrollbar-width: none; gap: 4px;
+}
+.topic-inner::-webkit-scrollbar { display: none; }
+
+.topic-btn {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--body); font-size: 0.83rem; font-weight: 700;
+  color: rgba(255,255,255,0.35); padding: 16px 18px;
+  border-bottom: 2.5px solid transparent;
+  white-space: nowrap; transition: all var(--t);
+}
+.topic-btn:hover  { color: rgba(255,255,255,0.65); }
+.topic-btn.active { color: var(--white); border-bottom-color: var(--blue); }
+
+.topic-count {
+  font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.25);
+  margin-left: auto; padding: 0 4px; white-space: nowrap;
+}
+
+/* ── Posts main ──────────────────────────────────────────────*/
+#posts-main {
+  background: var(--ink);
+  padding: 48px 0 96px;
+}
+
+/* Featured post (first/largest card) */
+.post-featured {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px; align-items: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  padding: 40px 44px;
+  margin-bottom: 28px;
+  text-decoration: none;
+  transition: background var(--t), border-color var(--t);
+}
+.post-featured:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.16);
+}
+
+.pf-meta {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.pf-date {
+  font-size: 0.78rem; color: rgba(255,255,255,0.35); font-weight: 600;
+}
+.pf-topic {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--blue);
+  background: rgba(0,99,167,0.18); padding: 3px 10px; border-radius: 20px;
+}
+.pf-title {
+  font-family: var(--display); font-style: italic; font-weight: 800;
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem); line-height: 1.15;
+  letter-spacing: -0.02em; color: var(--white);
+  margin-bottom: 14px;
+  font-variation-settings: 'opsz' 72;
+}
+.pf-excerpt {
+  font-size: 0.97rem; color: rgba(255,255,255,0.5);
+  line-height: 1.7; margin-bottom: 20px;
+}
+.pf-link {
+  font-size: 0.83rem; font-weight: 700; color: var(--blue);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: gap var(--t);
+}
+.pf-link::after { content: '→'; }
+.post-featured:hover .pf-link { gap: 9px; }
+
+.pf-thumb {
+  border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 16/10;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.pf-thumb-placeholder {
+  width: 100%; height: 100%; min-height: 180px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-style: italic; font-weight: 700;
+  font-size: 1.4rem; color: rgba(255,255,255,0.12);
+  font-variation-settings: 'opsz' 72;
+}
+
+/* Post cards grid */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.post-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 28px 30px;
+  display: flex; flex-direction: column;
+  text-decoration: none;
+  transition: background var(--t), border-color var(--t);
+}
+.post-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.16);
+}
+.post-card.coming-soon {
+  border-style: dashed;
+  align-items: center; justify-content: center;
+  text-align: center; min-height: 200px;
+  pointer-events: none;
+}
+
+/* Cards generated by Notion build (pc-* prefix) */
+.pc-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.pc-date { font-size: 0.75rem; color: rgba(255,255,255,0.3); font-weight: 600; }
+.pc-topic {
+  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--blue);
+}
+.pc-title {
+  font-family: var(--display); font-style: italic; font-weight: 700;
+  font-size: 1.15rem; line-height: 1.3; letter-spacing: -0.01em;
+  color: var(--white); margin-bottom: 10px;
+  font-variation-settings: 'opsz' 36;
+}
+.pc-excerpt {
+  font-size: 0.88rem; color: rgba(255,255,255,0.45);
+  line-height: 1.65; margin-bottom: 18px; flex: 1;
+}
+.pc-link {
+  font-size: 0.8rem; font-weight: 700; color: var(--blue);
+  display: inline-flex; align-items: center; gap: 5px;
+  align-self: flex-start; transition: gap var(--t);
+}
+.pc-link::after { content: '→'; }
+.post-card:hover .pc-link { gap: 8px; }
+
+/* Cards in the placeholder megaZN index (post-* prefix, dark variant) */
+.post-card .post-date {
+  font-size: 0.75rem; color: rgba(255,255,255,0.3);
+  font-weight: 600; margin-bottom: 12px;
+}
+.post-card .post-title {
+  font-family: var(--display); font-style: italic; font-weight: 700;
+  font-size: 1.15rem; line-height: 1.3; letter-spacing: -0.01em;
+  color: var(--white); margin-bottom: 10px;
+  font-variation-settings: 'opsz' 36;
+}
+.post-card .post-excerpt {
+  font-size: 0.88rem; color: rgba(255,255,255,0.45);
+  line-height: 1.65; margin-bottom: 18px; flex: 1;
+}
+.post-card .post-link {
+  font-size: 0.8rem; font-weight: 700; color: var(--blue);
+  display: inline-flex; align-items: center; gap: 5px;
+  align-self: flex-start; transition: gap var(--t);
+}
+.post-card .post-link::after { content: '→'; }
+.post-card:hover .post-link { gap: 8px; }
+
+.coming-soon-icon {
+  font-family: var(--display); font-style: italic; font-weight: 800;
+  font-size: 1.4rem; color: rgba(255,255,255,0.1);
+  margin-bottom: 12px; font-variation-settings: 'opsz' 72;
+}
+.coming-soon-text {
+  font-size: 0.85rem; color: rgba(255,255,255,0.25); line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   megaZN POST PAGE
+   ─────────────────────────────────────────────────────────────*/
+
+#post-header {
+  background: var(--ink);
+  padding: 140px 0 72px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.post-header-inner { max-width: 720px; }
+
+.post-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.35);
+  margin-bottom: 28px; transition: color var(--t);
+}
+.post-back::before { content: '←'; }
+.post-back:hover   { color: var(--blue); }
+
+.post-header-meta {
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap; margin-bottom: 20px;
+}
+
+.post-topic {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+  background: rgba(0,99,167,0.2); color: var(--blue);
+}
+.post-topic.topic-learning { background: rgba(26,107,26,0.2); color: #5db85d; }
+.post-topic.topic-design   { background: rgba(0,99,167,0.2);  color: var(--blue); }
+.post-topic.topic-build    { background: rgba(91,58,196,0.2);  color: #a688f5; }
+.post-topic.topic-misc     { background: rgba(160,82,10,0.2);  color: #e0924a; }
+
+.post-date-pub  { font-size: 0.82rem; color: rgba(255,255,255,0.35); font-weight: 600; }
+.post-read-time { font-size: 0.82rem; color: rgba(255,255,255,0.25); }
+
+.post-title {
+  font-family: var(--display); font-style: italic; font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.1;
+  letter-spacing: -0.03em; color: var(--white);
+  margin-bottom: 20px;
+  font-variation-settings: 'opsz' 72;
+}
+
+.post-subtitle {
+  font-size: 1.1rem; color: rgba(255,255,255,0.5);
+  line-height: 1.75; max-width: 640px;
+}
+
+/* ── Post body ───────────────────────────────────────────────*/
+#post-body {
+  background: var(--ink);
+  padding: 64px 0 96px;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 64px; align-items: start;
+}
+
+/* Prose */
+.post-content {
+  color: rgba(255,255,255,0.75);
+  font-size: 1.05rem; line-height: 1.85;
+  min-width: 0;
+}
+.post-content h2 {
+  font-family: var(--display); font-style: italic; font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem); line-height: 1.2;
+  letter-spacing: -0.02em; color: var(--white);
+  margin: 52px 0 20px;
+  font-variation-settings: 'opsz' 72;
+}
+.post-content h2:first-child { margin-top: 0; }
+.post-content h3 {
+  font-family: var(--display); font-weight: 700;
+  font-size: 1.15rem; color: var(--white);
+  margin: 32px 0 12px; font-variation-settings: 'opsz' 36;
+}
+.post-content p           { margin-bottom: 20px; }
+.post-content strong      { color: var(--white); font-weight: 700; }
+.post-content em          { font-style: italic; }
+.post-content a           { color: var(--blue); border-bottom: 1px solid rgba(0,99,167,0.4); transition: border-color var(--t); }
+.post-content a:hover     { border-color: var(--blue); }
+.post-content ul,
+.post-content ol          { padding-left: 24px; margin-bottom: 20px; }
+.post-content li          { margin-bottom: 8px; }
+.post-content hr          { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 48px 0; }
+.post-content code        { font-family: monospace; font-size: 0.9em; background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; color: rgba(255,255,255,0.85); }
+.post-content s           { opacity: 0.5; }
+.post-content blockquote  { border-left: 3px solid var(--blue); padding-left: 20px; margin: 28px 0; color: rgba(255,255,255,0.55); font-style: italic; }
+.post-content img         { width: 100%; border-radius: var(--radius-md); margin: 32px 0 8px; border: 1px solid rgba(255,255,255,0.08); }
+
+.post-img         { width: 100%; border-radius: var(--radius-md); margin: 32px 0 8px; border: 1px solid rgba(255,255,255,0.08); }
+.post-img-caption { font-size: 0.8rem; color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 28px; }
+
+.post-callout {
+  background: rgba(0,99,167,0.12);
+  border: 1px solid rgba(0,99,167,0.25);
+  border-radius: var(--radius-md);
+  padding: 20px 24px; margin: 28px 0;
+}
+.post-callout p { margin: 0; color: rgba(255,255,255,0.65); }
+
+/* Author card */
+.post-author {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 20px 24px; margin: 40px 0;
+}
+.post-author-photo {
+  font-size: 2rem; width: 52px; height: 52px;
+  background: rgba(255,255,255,0.06); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.post-author-name { font-weight: 700; color: var(--white); font-size: 0.92rem; margin-bottom: 4px; }
+.post-author-bio  { font-size: 0.83rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+/* Post navigation */
+.post-nav {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 40px;
+}
+.pn-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  transition: background var(--t), border-color var(--t);
+}
+.pn-item:hover         { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.16); }
+.pn-item.next          { text-align: right; }
+.pn-item a             { text-decoration: none; display: block; }
+.pn-dir  { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.25); display: block; margin-bottom: 6px; }
+.pn-title{ font-size: 0.88rem; font-weight: 700; color: rgba(255,255,255,0.7); line-height: 1.4; }
+.pn-item:hover .pn-title { color: var(--white); }
+
+/* Sidebar */
+.post-sidebar {
+  position: sticky; top: 84px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+.ps-section {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+.ps-label {
+  font-size: 0.67rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); margin-bottom: 14px;
+}
+.ps-toc { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.ps-toc a {
+  font-size: 0.83rem; color: rgba(255,255,255,0.4);
+  line-height: 1.5; display: block; padding: 3px 0 3px 12px;
+  border-left: 2px solid transparent;
+  transition: color var(--t), border-color var(--t);
+}
+.ps-toc a:hover  { color: rgba(255,255,255,0.7); }
+.ps-toc a.active { color: var(--white); border-left-color: var(--blue); }
+
+.ps-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ps-tag  {
+  font-size: 0.72rem; font-weight: 700;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5); padding: 4px 10px; border-radius: 20px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────*/
+@media (max-width: 900px) {
+  .post-featured          { grid-template-columns: 1fr; }
+  .pf-thumb               { display: none; }
+  .post-grid              { grid-template-columns: 1fr; }
+  .post-sidebar           { position: static; }
+}
+
+@media (max-width: 640px) {
+  #megazn-header          { padding: 110px 0 56px; }
+  #post-header            { padding: 110px 0 48px; }
+  .topic-inner            { padding: 0 20px; }
+  #posts-main             { padding: 32px 0 72px; }
+  #post-body              { padding: 40px 0 72px; }
+  .post-featured          { padding: 28px 24px; }
+  .post-nav               { grid-template-columns: 1fr; }
+}
