@@ -271,8 +271,9 @@ function generateIndexHtml(posts) {
   // Read the existing megazn/index.html and inject the posts
   const existingIndex = fs.readFileSync(path.join('megazn', 'index.html'), 'utf8');
   return existingIndex
-    .replace(/<!-- POSTS_START -->[\s\S]*?<!-- POSTS_END -->/, 
-      `<!-- POSTS_START -->\n${featuredHtml}\n<div class="posts-grid">\n${gridHtml}\n</div>\n<!-- POSTS_END -->`);
+    .replace(/<!-- POSTS_START -->[\s\S]*?<!-- POSTS_END -->/,
+      `<!-- POSTS_START -->\n${featuredHtml}\n<div class="posts-grid">\n${gridHtml}\n</div>\n<!-- POSTS_END -->`)
+    .replace(/id="topicCount">[^<]*</, `id="topicCount">${count}<`);
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
