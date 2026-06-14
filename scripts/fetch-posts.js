@@ -234,6 +234,32 @@ function generatePostHtml(post, content, toc, allPosts) {
 </html>`;
 }
 
+// ── Generate homepage megaZN cards ───────────────────────────────────────────
+function generateHomePostsHtml(posts) {
+  const latest = posts.slice(0, 3);
+
+  const cardHtml = latest.map((post, i) => `
+      <a href="/megazn/${post.slug}" class="post-card reveal${i > 0 ? ` reveal-delay-${i}` : ''}">
+        <div class="post-date">${post.date}</div>
+        <h3 class="post-title">${post.title}</h3>
+        <p class="post-excerpt">${post.excerpt}</p>
+        <span class="post-link">Read post</span>
+      </a>`).join('\n');
+
+  const comingSoon = posts.length < 3
+    ? `\n      <article class="post-card coming-soon reveal reveal-delay-${latest.length}">
+        <div class="coming-soon-icon">megaZN</div>
+        <p class="coming-soon-text">More posts incoming.<br>The yapping has only just begun.</p>
+      </article>`
+    : '';
+
+  const existingHome = fs.readFileSync('index.html', 'utf8');
+  return existingHome.replace(
+    /<!-- HOME_POSTS_START -->[\s\S]*?<!-- HOME_POSTS_END -->/,
+    `<!-- HOME_POSTS_START -->\n    <div class="posts-grid">${cardHtml}${comingSoon}\n    </div>\n    <!-- HOME_POSTS_END -->`
+  );
+}
+
 // ── Generate megaZN index page ────────────────────────────────────────────────
 function generateIndexHtml(posts) {
   const featured = posts[0];
@@ -314,6 +340,14 @@ async function main() {
     fs.writeFileSync(path.join(dir, 'index.html'), generatePostHtml(post, content, toc, posts));
     console.log(`✓ Generated /megazn/${post.slug}/`);
   }
+
+  // Update megaZN index
+  fs.writeFileSync(path.join('megazn', 'index.html'), generateIndexHtml(posts));
+  console.log('✓ Updated /megazn/');
+
+  // Update homepage cards
+  fs.writeFileSync('index.html', generateHomePostsHtml(posts));
+  console.log('✓ Updated homepage megaZN cards');
 
   console.log('Done!');
 }
