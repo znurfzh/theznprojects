@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="megaZN — Zulsyika Nurfaizah yapping about learning design, EdTech, and things she finds interesting.">
+  <title>megaZN — theznprojects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,700;1,9..144,800&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/megazn.css">
+</head>
+<body>
+
+<!-- NAV (dark variant) -->
+<nav id="nav" style="background:rgba(28,28,28,0.95); border-bottom-color: rgba(255,255,255,0.08);">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="brand-the" style="color:rgba(255,255,255,0.35);">the</span><span class="brand-zn">ZN</span><span class="brand-projects" style="color:rgba(255,255,255,0.35);">projects</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/work" style="color:rgba(255,255,255,0.4);">Work</a></li>
+      <li><a href="/megazn" class="active" style="color:var(--white);">megaZN</a></li>
+      <li><a href="/about" style="color:rgba(255,255,255,0.4);">About</a></li>
+      <li class="nav-cta"><a href="/#contact">Say hi</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header id="megazn-header">
+  <div class="wrap megazn-header-inner">
+    <div class="megazn-eyebrow reveal">megaZN</div>
+    <h1 class="megazn-page-title reveal reveal-delay-1">Yapping about<br>things I find<br>interesting.</h1>
+    <p class="megazn-page-sub reveal reveal-delay-2">Learning design thinking, EdTech observations, behind-the-build reflections, and the occasional deep dive into something completely unrelated. No particular schedule. Maximum curiosity.</p>
+  </div>
+</header>
+
+<!-- TOPIC FILTER -->
+<div id="topic-bar">
+  <div class="topic-inner">
+    <button class="topic-btn active" data-topic="all" onclick="filterPosts('all', this)">All posts</button>
+    <button class="topic-btn" data-topic="learning" onclick="filterPosts('learning', this)">Learning Design</button>
+    <button class="topic-btn" data-topic="design" onclick="filterPosts('design', this)">Design</button>
+    <button class="topic-btn" data-topic="build" onclick="filterPosts('build', this)">Behind the Build</button>
+    <button class="topic-btn" data-topic="misc" onclick="filterPosts('misc', this)">Misc Yapping</button>
+    <span class="topic-count" id="topicCount">2 posts coming soon</span>
+  </div>
+</div>
+
+<!-- POSTS -->
+<main id="posts-main">
+  <div class="wrap">
+
+    <!-- Featured post -->
+    <a href="/megazn/on-affective-computing" class="post-featured reveal" data-topic="learning">
+      <div class="pf-content">
+        <div class="pf-meta">
+          <span class="pf-date">Coming soon</span>
+          <span class="pf-topic topic-learning">Learning Design</span>
+        </div>
+        <h2 class="pf-title">What studying affective computing taught me about designing for real humans</h2>
+        <p class="pf-excerpt">Building a Tetris game that reads your face sounds like a gimmick. It turned into the most interesting design problem I've worked on — and made me rethink everything I assumed about what "learner-centered" actually means in practice.</p>
+        <span class="pf-link">Read post</span>
+      </div>
+      <div class="pf-thumb">
+        <div class="pf-thumb-placeholder">Affectris &<br>Affective Computing</div>
+      </div>
+    </a>
+
+    <!-- Grid posts -->
+    <div class="posts-grid">
+
+      <a href="/megazn/on-learn-unlearn-relearn" class="post-card reveal" data-topic="learning">
+        <div class="pc-meta">
+          <span class="pc-date">Coming soon</span>
+          <span class="pc-topic topic-learning">Learning Design</span>
+        </div>
+        <h3 class="pc-title">On Learn, Unlearn, Relearn — and why most people only do one of them</h3>
+        <p class="pc-excerpt">The Toffler quote gets cited constantly in L&D. The actual practice of it is much harder and much more specific than the slogan suggests. Here's what it looks like when you actually try.</p>
+        <span class="pc-link">Read post</span>
+      </a>
+
+      <div class="post-card coming-soon reveal reveal-delay-1" aria-hidden="true">
+        <div class="cs-icon">megaZN</div>
+        <p class="cs-text">More posts incoming.<br>The yapping has only just begun.</p>
+      </div>
+
+      <div class="post-card coming-soon reveal reveal-delay-2" aria-hidden="true">
+        <div class="cs-icon">?</div>
+        <p class="cs-text">Something about puns,<br>probably.</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER (dark) -->
+<footer style="background:rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.07);">
+  <div class="footer-inner">
+    <span class="footer-logo">
+      <span class="brand-the" style="color:rgba(255,255,255,0.3);">the</span><span class="brand-zn">ZN</span><span class="brand-projects" style="color:rgba(255,255,255,0.3);">projects</span>
+    </span>
+    <ul class="footer-links">
+      <li><a href="/work">Work</a></li>
+      <li><a href="/megazn">megaZN</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Zulsyika Nurfaizah</span>
+  </div>
+</footer>
+
+<script src="/assets/base.js"></script>
+<script>
+  // Keep nav dark on scroll for this dark-bg page
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    // Override base.js scrolled behavior for dark nav
+    nav.style.borderBottomColor = window.scrollY > 40
+      ? 'rgba(255,255,255,0.12)'
+      : 'rgba(255,255,255,0.08)';
+  }, { passive: true });
+
+  function filterPosts(topic, btn) {
+    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const featured = document.querySelector('.post-featured');
+    const cards    = document.querySelectorAll('.post-card:not(.coming-soon)');
+    let visible    = 0;
+
+    // Handle featured post
+    if (featured) {
+      const show = topic === 'all' || featured.dataset.topic === topic;
+      featured.style.display = show ? '' : 'none';
+      if (show) visible++;
+    }
+
+    // Handle grid cards
+    cards.forEach(card => {
+      const show = topic === 'all' || card.dataset.topic === topic;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    const label = visible === 0 ? 'No posts yet'
+      : visible === 1 ? '1 post coming soon'
+      : `${visible} posts coming soon`;
+    document.getElementById('topicCount').textContent = label;
+  }
+</script>
+</body>
+</html>
