@@ -294,11 +294,18 @@ function generateIndexHtml(posts) {
 
   const count = `${posts.length} post${posts.length !== 1 ? 's' : ''}`;
 
+  const postsBlock = posts.length === 0
+    ? `  <div class="posts-empty">
+    <p class="posts-empty-title">Nothing here yet.</p>
+    <p class="posts-empty-sub">Posts are incoming. Maximum curiosity, minimal schedule.</p>
+  </div>`
+    : `${featuredHtml}\n<div class="posts-grid">\n${gridHtml}\n</div>`;
+
   // Read the existing megazn/index.html and inject the posts
   const existingIndex = fs.readFileSync(path.join('megazn', 'index.html'), 'utf8');
   return existingIndex
     .replace(/<!-- POSTS_START -->[\s\S]*?<!-- POSTS_END -->/,
-      `<!-- POSTS_START -->\n${featuredHtml}\n<div class="posts-grid">\n${gridHtml}\n</div>\n<!-- POSTS_END -->`)
+      `<!-- POSTS_START -->\n${postsBlock}\n<!-- POSTS_END -->`)
     .replace(/id="topicCount">[^<]*</, `id="topicCount">${count}<`);
 }
 

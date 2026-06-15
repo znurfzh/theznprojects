@@ -16,6 +16,23 @@
 .photo-placeholder .pp-icon { font-size: 2rem; opacity: 0.4; }
 .photo-placeholder .pp-text { font-size: 0.68rem; color: var(--muted); text-align: center; line-height: 1.4; }
 
+/* ── Hero entrance animation (replaces scroll-reveal for above-fold content) ── */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow    { animation: hero-fade-up 0.55s ease both; }
+.hero-photo-name { animation: hero-fade-up 0.55s ease both; animation-delay: 0.08s; }
+.hero-tagline    { animation: hero-fade-up 0.55s ease both; animation-delay: 0.16s; }
+.hero-actions    { animation: hero-fade-up 0.55s ease both; animation-delay: 0.24s; }
+.hero-sidebar    { animation: hero-fade-up 0.55s ease both; animation-delay: 0.12s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-photo-name, .hero-tagline, .hero-actions, .hero-sidebar {
+    animation: none;
+  }
+}
+
 /* ── HERO ──────────────────────────────────────────────────────────────────── */
 #hero {
   padding: 160px 0 100px;

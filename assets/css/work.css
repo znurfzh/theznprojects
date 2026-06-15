@@ -91,6 +91,18 @@
 .card-link:hover { gap: 9px; }
 .card-link::after { content: '→'; }
 
+.card-status {
+  font-size: 0.78rem; font-weight: 700;
+  color: var(--muted); letter-spacing: 0.04em;
+  margin-top: auto; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.card-status::before {
+  content: ''; display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--muted); opacity: 0.5;
+}
+
 /* ── Empty state ────────────────────────────────────────────── */
 #empty-state {
   display: none; grid-column: span 12;

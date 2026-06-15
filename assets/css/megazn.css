@@ -212,6 +212,19 @@
 .post-card .post-link::after { content: '→'; }
 .post-card:hover .post-link { gap: 8px; }
 
+.posts-empty {
+  padding: 80px 0 40px;
+  text-align: center;
+}
+.posts-empty-title {
+  font-family: var(--display); font-style: italic; font-weight: 700;
+  font-size: 1.5rem; color: rgba(255,255,255,0.35);
+  margin-bottom: 10px; font-variation-settings: 'opsz' 72;
+}
+.posts-empty-sub {
+  font-size: 0.9rem; color: rgba(255,255,255,0.2); line-height: 1.6;
+}
+
 .coming-soon-icon {
   font-family: var(--display); font-style: italic; font-weight: 800;
   font-size: 1.4rem; color: rgba(255,255,255,0.1);
