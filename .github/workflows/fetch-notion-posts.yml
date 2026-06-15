@@ -1,11 +1,9 @@
 name: Fetch megaZN posts from Notion
 
 on:
-  schedule:
-    # Runs every 6 hours — picks up any newly published Notion posts
-    - cron: '0 */6 * * *'
   workflow_dispatch:
-    # Also triggerable manually from the Actions tab in GitHub
+    # Triggerable manually from Actions tab if needed
+    # Primary publish flow: Notion automation → Vercel Deploy Hook (no schedule needed)
 
 jobs:
   build:

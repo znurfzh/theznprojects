@@ -266,7 +266,7 @@ function generateIndexHtml(posts) {
   const rest     = posts.slice(1);
 
   const featuredHtml = featured ? `
-    <a href="/megazn/${featured.slug}" class="post-featured reveal" data-topic="${featured.tags[0]?.toLowerCase() || ''}">
+    <a href="/megazn/${featured.slug}" class="post-featured reveal" data-topic="${featured.tags[0] ? tagToTopic(featured.tags[0]) : ''}">
       <div class="pf-content">
         <div class="pf-meta">
           <span class="pf-date">${featured.date}</span>
@@ -282,7 +282,7 @@ function generateIndexHtml(posts) {
     </a>` : '';
 
   const gridHtml = rest.map((post, i) => `
-    <a href="/megazn/${post.slug}" class="post-card reveal${i > 0 ? ` reveal-delay-${Math.min(i, 3)}` : ''}" data-topic="${post.tags[0]?.toLowerCase() || ''}">
+    <a href="/megazn/${post.slug}" class="post-card reveal${i > 0 ? ` reveal-delay-${Math.min(i, 3)}` : ''}" data-topic="${post.tags[0] ? tagToTopic(post.tags[0]) : ''}">
       <div class="pc-meta">
         <span class="pc-date">${post.date}</span>
         <span class="pc-topic">${post.tags[0] || ''}</span>
@@ -302,13 +302,24 @@ function generateIndexHtml(posts) {
     .replace(/id="topicCount">[^<]*</, `id="topicCount">${count}<`);
 }
 
+// ── Topic slug mapping (Notion tag → filter data-topic value) ─────────────────
+const TOPIC_MAP = {
+  'learning design': 'learning',
+  'design':          'design',
+  'behind the build':'build',
+  'misc yapping':    'misc',
+};
+function tagToTopic(tag) {
+  return TOPIC_MAP[tag.toLowerCase()] ?? tag.toLowerCase().split(' ')[0];
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 async function main() {
   console.log('Fetching posts from Notion...');
 
   const response = await notion.databases.query({
     database_id: DATABASE_ID,
-    filter: { property: 'Status', select: { equals: 'Published' } },
+    filter: { property: 'Status', status: { equals: 'Published' } },
     sorts: [{ property: 'Date', direction: 'descending' }]
   });
 
@@ -338,7 +349,21 @@ async function main() {
     const dir = path.join('megazn', post.slug);
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, 'index.html'), generatePostHtml(post, content, toc, posts));
+    fs.writeFileSync(path.join(dir, '.notion-generated'), '');
     console.log(`✓ Generated /megazn/${post.slug}/`);
+  }
+
+  // Remove generated post dirs for posts no longer published
+  const publishedSlugs = new Set(posts.map(p => p.slug));
+  const megaznDir = path.join('megazn');
+  for (const entry of fs.readdirSync(megaznDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const slug = entry.name;
+    const marker = path.join(megaznDir, slug, '.notion-generated');
+    if (fs.existsSync(marker) && !publishedSlugs.has(slug)) {
+      fs.rmSync(path.join(megaznDir, slug), { recursive: true, force: true });
+      console.log(`✗ Removed stale /megazn/${slug}/`);
+    }
   }
 
   // Update megaZN index
