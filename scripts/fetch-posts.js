@@ -196,7 +196,7 @@ function generatePostHtml(post, content, toc, allPosts) {
   </div>
 </section>
 
-<footer style="background:var(--ink); border-top: 1px solid rgba(255,255,255,0.07);">
+<footer style="background:var(--ink); border-top: 1px solid rgba(255,255,255,0.1);">
   <div class="footer-inner">
     <span class="footer-logo">
       <span class="brand-the" style="color:rgba(255,255,255,0.3);">the</span><span class="brand-zn">ZN</span><span class="brand-projects" style="color:rgba(255,255,255,0.3);">projects</span>
