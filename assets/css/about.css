@@ -41,6 +41,12 @@
 .bio-photo-frame .pp-icon { font-size: 3rem; opacity: 0.3; }
 .bio-photo-frame .pp-text { font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.5; }
 
+.bio-photo-img {
+  width: 100%; aspect-ratio: 4/5;
+  object-fit: cover; object-position: top;
+  border-radius: var(--radius-lg);
+}
+
 .bio-quick-facts { display: flex; flex-direction: column; }
 .bqf-row {
   display: flex; gap: 12px; align-items: baseline;
