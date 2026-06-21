@@ -326,7 +326,7 @@ async function main() {
 
   const response = await notion.databases.query({
     database_id: DATABASE_ID,
-    filter: { property: 'Status', status: { equals: 'Published' } },
+    filter: { property: 'Status', select: { equals: 'Published' } },
     sorts: [{ property: 'Date', direction: 'descending' }]
   });
 
