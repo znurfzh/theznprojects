@@ -41,10 +41,17 @@
 .bio-photo-frame .pp-icon { font-size: 3rem; opacity: 0.3; }
 .bio-photo-frame .pp-text { font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.5; }
 
+.bio-photo-mat {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
 .bio-photo-img {
   width: 100%; aspect-ratio: 4/5;
   object-fit: cover; object-position: top;
-  border-radius: var(--radius-lg);
+  border-radius: calc(var(--radius-lg) - 8px);
+  display: block;
 }
 
 .bio-quick-facts { display: flex; flex-direction: column; }
