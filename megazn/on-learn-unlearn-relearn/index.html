@@ -140,6 +140,18 @@
 
         <hr>
 
+        <!-- Share -->
+        <div class="post-share">
+          <span class="post-share-label">Share</span>
+          <div class="post-share-btns" id="shareBtns">
+            <a class="share-btn" id="shareX" href="#" target="_blank" rel="noopener">𝕏 / Twitter</a>
+            <a class="share-btn" id="shareLinkedIn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="share-btn" id="shareWhatsApp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+            <button class="share-btn" id="shareCopy">Copy link</button>
+            <button class="share-btn" id="shareNative" style="display:none">Share ↗</button>
+          </div>
+        </div>
+
         <!-- Author card -->
         <div class="post-author">
           <div class="post-author-photo">🧑‍💻</div>
@@ -235,6 +247,28 @@
       ? 'rgba(255,255,255,0.12)'
       : 'rgba(255,255,255,0.08)';
   }, { passive: true });
+
+  // Share buttons
+  (function() {
+    const url   = encodeURIComponent(location.href);
+    const title = encodeURIComponent(document.title);
+    document.getElementById('shareX').href         = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+    document.getElementById('shareLinkedIn').href  = `https://linkedin.com/sharing/share-offsite/?url=${url}`;
+    document.getElementById('shareWhatsApp').href  = `https://wa.me/?text=${title}%20${url}`;
+    const copyBtn = document.getElementById('shareCopy');
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(location.href).then(() => {
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.textContent = 'Copy link'; copyBtn.classList.remove('copied'); }, 2000);
+      });
+    });
+    const nativeBtn = document.getElementById('shareNative');
+    if (navigator.share) {
+      nativeBtn.style.display = '';
+      nativeBtn.addEventListener('click', () => navigator.share({ title: document.title, url: location.href }));
+    }
+  })();
 
   // Active TOC highlight on scroll
   const headings  = document.querySelectorAll('.post-content h2[id]');

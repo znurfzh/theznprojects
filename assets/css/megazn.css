@@ -341,6 +341,41 @@
 }
 .post-callout p { margin: 0; color: rgba(255,255,255,0.65); }
 
+/* Share bar */
+.post-share {
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap; margin: 40px 0 0;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.post-share-label {
+  font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3); flex-shrink: 0;
+}
+.post-share-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--body); font-size: 0.78rem; font-weight: 700;
+  padding: 7px 14px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.65);
+  cursor: pointer; text-decoration: none;
+  transition: background var(--t), color var(--t), border-color var(--t);
+  line-height: 1;
+}
+.share-btn:hover {
+  background: rgba(255,255,255,0.12);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.3);
+}
+.share-btn.copied {
+  background: rgba(0,99,167,0.25);
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
 /* Author card */
 .post-author {
   display: flex; align-items: flex-start; gap: 16px;

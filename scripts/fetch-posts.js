@@ -170,6 +170,16 @@ function generatePostHtml(post, content, toc, allPosts) {
       <article class="post-content">
         ${content}
         <hr>
+        <div class="post-share">
+          <span class="post-share-label">Share</span>
+          <div class="post-share-btns">
+            <a class="share-btn" id="shareX" href="#" target="_blank" rel="noopener">𝕏 / Twitter</a>
+            <a class="share-btn" id="shareLinkedIn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="share-btn" id="shareWhatsApp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+            <button class="share-btn" id="shareCopy">Copy link</button>
+            <button class="share-btn" id="shareNative" style="display:none">Share ↗</button>
+          </div>
+        </div>
         <div class="post-author">
           <div class="post-author-photo">🧑‍💻</div>
           <div>
@@ -229,6 +239,28 @@ function generatePostHtml(post, content, toc, allPosts) {
       tocLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
     }, { passive: true });
   }
+
+  // Share buttons
+  (function() {
+    const url   = encodeURIComponent(location.href);
+    const title = encodeURIComponent(document.title);
+    document.getElementById('shareX').href         = 'https://twitter.com/intent/tweet?url=' + url + '&text=' + title;
+    document.getElementById('shareLinkedIn').href  = 'https://linkedin.com/sharing/share-offsite/?url=' + url;
+    document.getElementById('shareWhatsApp').href  = 'https://wa.me/?text=' + title + '%20' + url;
+    const copyBtn = document.getElementById('shareCopy');
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(location.href).then(() => {
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.textContent = 'Copy link'; copyBtn.classList.remove('copied'); }, 2000);
+      });
+    });
+    const nativeBtn = document.getElementById('shareNative');
+    if (navigator.share) {
+      nativeBtn.style.display = '';
+      nativeBtn.addEventListener('click', () => navigator.share({ title: document.title, url: location.href }));
+    }
+  })();
 </script>
 </body>
 </html>`;
