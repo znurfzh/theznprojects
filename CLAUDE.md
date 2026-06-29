@@ -18,7 +18,10 @@ URL: theznprojects.com (or theznprojects.vercel.app)
 - **Frontend:** Vanilla HTML / CSS / JS
 - **Hosting:** Vercel (static)
 - **Fonts:** Fraunces (display/headings, variable opsz) + PT Sans (body)
-- **No CMS yet** — content is hand-coded; Notion CMS integration is planned
+- **CMS:** Notion — posts fetched via `scripts/fetch-posts.js` (Node, run by Vercel build)
+- **Publish flow:** Notion automation → Vercel Deploy Hook → Vercel runs `npm run build`
+  - GitHub Actions workflow exists (`fetch-notion-posts.yml`) but schedule is removed;
+    only `workflow_dispatch` remains. Primary publish path is the Deploy Hook.
 
 ---
 
@@ -47,6 +50,10 @@ URL: theznprojects.com (or theznprojects.vercel.app)
 ## Brand identity
 - Name: **theznprojects** — pronounced "design projects" (ZN = initials)
 - Logo concept: ZN negative space, "The" and "Projects" on the Z
+- Logo font: **LEIXO** (installed at `~/Library/Fonts/LEIXO-DEMO.ttf`)
+- Logo files: `assets/images/logo-blue.png` (blue bg), `assets/images/logo-dark.png` (dark bg)
+  — Design B (large ZN mark). Use `logo-blue.png` on light pages, `logo-dark.png` on dark.
+- Favicon: `assets/images/favicon.svg` — blue rounded square (#0063A7), bold sans-serif "ZN"
 - Brand treatment in HTML:
   ```html
   <span class="brand-the">the</span>
@@ -75,12 +82,21 @@ URL: theznprojects.com (or theznprojects.vercel.app)
 ├── work/nexus-insight/index.html          → case study (stub)
 ├── work/affectris/index.html              → case study (stub)
 ├── work/cognizance/index.html             → case study (stub)
-├── megazn/index.html                   → blog index
-├── megazn/on-affective-computing/index.html   → post (placeholder)
-├── megazn/on-learn-unlearn-relearn/index.html → post (scaffolded)
+├── megazn/index.html                   → blog index (auto-generated between POSTS_START/END markers)
+├── megazn/on-affective-computing/index.html   → post (placeholder, manual)
+├── megazn/on-learn-unlearn-relearn/index.html → post (scaffolded, manual)
+├── scripts/
+│   └── fetch-posts.js                  → Notion → static HTML generator (run by Vercel build)
+├── .github/workflows/
+│   └── fetch-notion-posts.yml          → manual dispatch only (no schedule)
 └── assets/
     ├── base.js                         → nav scroll + scroll reveal (shared)
-    ├── images/                         → screenshots, photos (add here)
+    ├── images/
+    │   ├── zulsyika.jpeg               → headshot photo (used in hero + about)
+    │   ├── logo-blue.png               → Design B logo, white on blue bg
+    │   ├── logo-dark.png               → Design B logo, white on dark bg
+    │   ├── favicon.svg                 → site favicon (all 13 pages)
+    │   └── favicon-64.png              → fallback (unused, kept for reference)
     └── css/
         ├── base.css    → tokens, reset, nav, footer, buttons, reveal, tags
         ├── home.css    → hero, featured work, about strip, megaZN, contact
@@ -110,6 +126,10 @@ Two things only:
    `.visible` class. Stagger via `.reveal-delay-1/2/3`.
 
 All page-specific JS is inline in each HTML file.
+
+**Note:** Hero elements on the homepage use CSS `@keyframes hero-fade-up`
+animation instead of scroll reveal (they're above the fold so IntersectionObserver
+never fires on first paint).
 
 ---
 
@@ -150,11 +170,23 @@ megaZN pages use a dark nav variant (inline style overrides).
   </div>
 </footer>
 ```
+megaZN dark pages add inline: `style="background:var(--ink); border-top: 1px solid rgba(255,255,255,0.1);"`
+
+### Hero photo (homepage)
+Photo sits inside `.photo-placeholder` div (white mat frame, 16px padding, no shadow).
+`.photo-placeholder img` fills the inner area with `object-fit: cover; object-position: top`.
+Outer frame: `width: 160px; height: 172px` — height chosen to align bottom with "Nurfaizah." baseline.
+
+### About page photo
+Photo sits inside `.bio-photo-mat` div (same white mat treatment as hero, 16px padding).
+`.bio-photo-img` fills with `aspect-ratio: 4/5; object-fit: cover; object-position: top`.
 
 ### Project cards (work index)
 Cards have `data-categories="ld ux sys gfx"` (space-separated).
 Filter JS reads this to show/hide. Card sizes: `.project-card` (span 4),
 `.size-wide` (6), `.size-hero` (8), `.size-half` (6).
+Stub case study cards use `<span class="card-status">Case study in progress</span>`
+instead of `<span class="card-link">Read case study</span>`.
 
 ### Case study structure
 Every case study uses: `cs-page-header` → `cs-tldr` → `cs-body`
@@ -162,6 +194,22 @@ TL;DR block: 4-cell grid (Problem / Role / Outcome / Timeframe)
 Body: `.cs-layout` (2-col: `.cs-narrative` + `.cs-sidebar`)
 Section variants: `.cs-section-sys` (purple), `.cs-section-ux` (blue),
 `.cs-section-ld` (green)
+
+### megaZN post pages
+Every post (manual or Notion-generated) includes:
+- Share bar (`.post-share`) above the author card: X/Twitter, LinkedIn, WhatsApp,
+  Copy link (shows "Copied!" for 2s), native Web Share API button (mobile only)
+- Author card (`.post-author`)
+- Post navigation (`.post-nav`)
+- Sidebar with TOC, tags, related links
+
+### Notion CMS post generation (`scripts/fetch-posts.js`)
+- Filters Notion DB for `Status = Published` (Select property, not Status property)
+- TOPIC_MAP normalises tags: "Learning Design" → "learning", "Design" → "design",
+  "Behind the Build" → "build", "Misc Yapping" → "misc"
+- Writes `.notion-generated` marker in each post dir; cleanup loop removes stale dirs
+- Generates `megazn/index.html` between `<!-- POSTS_START -->` and `<!-- POSTS_END -->`
+- Shows `.posts-empty` state when 0 published posts
 
 ---
 
@@ -184,8 +232,8 @@ Section variants: `.cs-section-sys` (purple), `.cs-section-ux` (blue),
 | on-learn-unlearn-relearn | ⬜ Scaffolded | Full section briefs, awaiting writing |
 
 ### About page
-✅ Complete — bio, interests, skills (grouped by category), languages,
-education, experience, site history, acknowledgements (includes Claude credit)
+✅ Complete — bio, photo, interests, skills (grouped by category), languages,
+education, experience, site history (incl. logo display), acknowledgements
 
 ---
 
@@ -199,13 +247,18 @@ education, experience, site history, acknowledgements (includes Claude credit)
 
 ---
 
-## Planned but not built
-- Notion CMS integration for megaZN blog posts
-- Photo: add to `/assets/images/zulsyika.jpg`, replace placeholder in hero
-  and about page (both have commented instructions)
-- Project screenshots: add to `/assets/images/`, replace `cs-img-placeholder`
-  divs in case studies
-- Resume: add to `/assets/resume.pdf`, linked from about page
+## Still to build
+- **Case study content** — write the 5 stub case studies (NSEI, ETHIC, Nexus Insight,
+  Affectris, Cognizance) and replace `cs-img-placeholder` divs with real screenshots
+- **Resume** — add to `/assets/resume.pdf`; linked from about page (link exists, file missing)
+- **megaZN post writing** — write the two scaffolded manual posts
+- **Likes** — planned: Google Sheets + Apps Script as backend. One Sheet tab for
+  like counts (keyed by post slug), Apps Script `doGet`/`doPost` web endpoint,
+  small JS snippet per post to fetch and increment count.
+- **Comments** — planned: same Google Sheets + Apps Script backend. Separate tab
+  for comments (slug, name, text, timestamp). Needs spam/validation consideration.
+  Discussed Disqus (general audience, has ads) vs Giscus (GitHub users only, clean).
+  Decision deferred until readership is clearer.
 
 ---
 
@@ -217,4 +270,13 @@ education, experience, site history, acknowledgements (includes Claude credit)
 4. **megaZN dark pages** — nav, topic bar, posts, footer all on `var(--ink)`
 5. **TL;DR block is not a summary** — it's a hook for the narrative below
 6. **brand-zn is uppercase ZN** — not lowercase "zn"
-7. **Photo placeholder** stays until real photo is ready — do not remove
+7. **Logo: Design B** — large ZN mark, preferred over Design A (text-only wordmark).
+   `logo-blue.png` for light pages, `logo-dark.png` for dark pages.
+8. **Favicon: SVG with system sans-serif** — embedded LEIXO font fails silently in
+   browser favicon context; PNG at 64px was blurry. SVG + Arial renders sharp at all sizes.
+9. **Nav/footer: wordmark only** — no logo mark beside the wordmark. Wordmark already
+   carries the brand identity; adding the mark would be redundant.
+10. **Hero photo: white mat frame** — `.photo-placeholder` wrapper with 16px padding,
+    solid border, no shadow. Chosen over bleeding the photo to the frame edges.
+11. **Notion publish via Deploy Hook** — Notion automation triggers Vercel Deploy Hook
+    directly. GitHub Actions schedule removed (was redundant and caused failure emails).
