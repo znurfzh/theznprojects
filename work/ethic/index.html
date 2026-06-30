@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ETHIC — Educational Technology Hub for Indonesian Community. UX design case study by Zulsyika Nurfaizah.">
+  <meta name="description" content="ETHIC: Educational Technology Hub for Indonesian Community. An alumni-driven knowledge-sharing platform closing the theory-practice gap. NYU Steinhardt capstone case study by Zulsyika Nurfaizah.">
   <title>ETHIC — theznprojects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,700;1,9..144,800&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -29,10 +29,11 @@
   <div class="wrap cs-page-header-inner">
     <a href="/work" class="cs-back">All work</a>
     <div class="cs-header-tags">
+      <span class="tag tag-ld">Learning Design</span>
       <span class="tag tag-ux">UX Design</span>
     </div>
     <h1 class="cs-title">ETHIC</h1>
-    <p class="cs-subtitle">Educational Technology Hub for Indonesian Community — a knowledge-sharing platform designed end-to-end from research through high-fidelity prototype.</p>
+    <p class="cs-subtitle">Educational Technology Hub for Indonesian Community: an alumni-driven knowledge-sharing platform built to close the theory-practice gap, carried from field research all the way to a working React prototype.</p>
   </div>
 </header>
 
@@ -41,19 +42,19 @@
     <div class="cs-tldr-grid">
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Problem</div>
-        <div class="cs-tldr-val">How do you design a knowledge-sharing platform that actually serves the Indonesian EdTech community — not just replicates what already exists?</div>
+        <div class="cs-tldr-val">Educational Technology students at Universitas Negeri Jakarta graduate strong in theory but short on practical skills, professional networks, and a clear sense of where the field even leads. How do you close that gap without rebuilding the whole curriculum?</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">My Role</div>
-        <div class="cs-tldr-val">UX Designer · Graduate Coursework, NYU</div>
+        <div class="cs-tldr-val">Learning Experience Designer · solo capstone · NYU Steinhardt (LTXD)</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Outcome</div>
-        <div class="cs-tldr-val">A full UX design process — user research, information architecture, wireframes, and high-fidelity prototype — for a community knowledge platform.</div>
+        <div class="cs-tldr-val">ETHIC, a working React-built community-of-practice platform connecting students, alumni, and industry, shaped through three rounds of prototyping and user testing. Live on Render.</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">Timeframe</div>
-        <div class="cs-tldr-val">2024 · NYU Graduate Coursework</div>
+        <div class="cs-tldr-val">2025 · NYU Steinhardt Capstone Thesis</div>
       </div>
     </div>
   </div>
@@ -65,41 +66,69 @@
       <article class="cs-narrative">
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">ETHIC — cover image</div>
-          <div class="cip-hint">Replace with your actual screenshot or mockup</div>
+          <div class="cip-label">ETHIC cover image</div>
+          <div class="cip-hint">Landing page or Explore dashboard screenshot from the live Render build</div>
         </div>
 
         <h2 id="context">Context &amp; Problem</h2>
-        <p><strong>[Your writing goes here]</strong> — What is the Indonesian EdTech community's current landscape? What gap does ETHIC address? Who is it for?</p>
+        <p>Educational Technology students at Universitas Negeri Jakarta (UNJ) leave with serious theoretical grounding (a 155-credit curriculum heavy on learning theory and technical skill). What they don't leave with, consistently, is the practical experience, professional network, and career clarity to actually enter the industry. Internships are too short and too narrow to bridge it; one alumnus put it plainly: <em>"the theories are still very relevant, but we need more practical application so it becomes even more relevant with the industry needs."</em></p>
+        <p>There's a second, quieter problem: the field itself is hard to explain. Unlike engineering or teaching, Educational Technology doesn't map to a single tidy profession, which breeds real anxiety about what comes after graduation. <em>"When people ask me about Educational Technology, I struggle to explain, it doesn't fit into a straightforward profession,"</em> one student said. The theory-practice gap is global, but in Indonesia's centralized, resource-uneven system it bites harder, and post-COVID it collides with weak professional networks.</p>
+        <p><strong>The decisive scoping move.</strong> Reforming the curriculum is the obvious lever, and it's exactly the lever this project deliberately <em>didn't</em> pull. Curriculum reform is slow, institutional, and already well studied by others. Instead, I focused on an under-used asset that's right there: <strong>alumni</strong>. As industry insiders and program veterans, alumni can offer mentorship, real-world insight, and networks, the informal learning partners who can bridge the gap from outside the curriculum. The whole project pivots on that reframing: not "fix the program," but "connect the people the program already produced back to the people still in it."</p>
 
         <h2 id="process">Process &amp; Decisions</h2>
-        <p><strong>[Your writing goes here]</strong> — How did you conduct user research? What did you discover about how educators and EdTech practitioners currently share knowledge? What shaped the information architecture?</p>
+        <p><strong>Research before design.</strong> The point of view was grounded in real data, not assumption: a survey of <strong>53 students</strong> with follow-up interviews of <strong>11</strong>, <strong>69 alumni</strong> survey responses, and interviews with <strong>9 faculty members</strong>, plus industry voices. Four insight statements surfaced repeatedly: practicality is paramount, career preparation has to be holistic (not just technical), sustained mentorship matters more than one-off sessions, and both students and alumni want a genuine <em>community</em>, not a noticeboard.</p>
+        <p><strong>Learning from what already exists.</strong> I audited four reference models: the AECT Alumni Mentorship Initiative, Drexel's co-op program, Harvard Business School's alumni network, and the informal EdTech Career Lab on LinkedIn. Each works, and each falls short in the same revealing ways: engagement is sporadic, the tools are fragmented across ad-hoc channels, and none are localized to the Indonesian context. That gap defined ETHIC's wedge: a single, structured, locally-grounded space rather than another scattered program.</p>
+        <p><strong>Designing for two people.</strong> Two personas anchored every decision: <strong>Fai Wijaya</strong>, a 20-year-old third-year student who can't see how a course like Educational Sociology applies in the real world, and <strong>Kari Dewanto</strong>, a 28-year-old alumna who wants to give back but has no structured way to. A six-stage user scenario (Discovery → Exploration → Connection → Participation → Engagement → Development) traced how Fai finds Kari through a recommended resource and grows from reader to mentee, making the abstract platform concrete.</p>
+        <p><strong>Theory doing real work.</strong> The design is underpinned by eight learning frameworks, but one is load-bearing: Lave &amp; Wenger's <em>community of practice</em>. ETHIC isn't a content library with a mentor bolt-on. It's an attempt to build a genuine CoP where students, alumni, and practitioners co-create knowledge. Constructivism, situated learning, connectivism, social learning, cognitive apprenticeship, and self-determination theory each justify specific features rather than decorating them.</p>
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Research synthesis / IA / wireframe image</div>
-          <div class="cip-hint">Replace with your actual work artifact</div>
+          <div class="cip-label">Research synthesis: personas, insight statements, or the logic model</div>
+          <div class="cip-hint">Fai &amp; Kari personas, the SCAMPER board, or the logic-model diagram from the thesis</div>
         </div>
 
         <h2 id="solution">The Solution</h2>
-        <p><strong>[Your writing goes here]</strong> — Walk through the platform design: key features, interaction patterns, and the design decisions that distinguish it.</p>
+        <p>The most important thing about ETHIC's design isn't a screen. It's that the form changed twice as I learned more.</p>
+        <p><strong>Low-fidelity: a website.</strong> The first concept-tested prototype was a public website with six sections (Home, Spotlight, Forum, Mentorship, Challenge, and Repository) built from a SCAMPER brainstorm with 3 students, 5 alumni, and 2 faculty. It proved the content model but exposed a question I hadn't fully answered: was a website even the right medium?</p>
+        <p><strong>The pivot: website → web application.</strong> During mid-fidelity testing, a practitioner pushed me to think harder about the difference between a <em>website</em> and a <em>web application</em>. A knowledge-sharing community of practice needs identity, persistence, and member-only space, so I pivoted to a web app with login/registration, a social feed modeled on X and Reddit, learning paths, a resource library, and a personal analytics view for reflective learning. This was the project's sharpest design decision: matching the medium to the job rather than to the first idea.</p>
+        <p><strong>Final: ETHIC, built in React.</strong> The final working prototype is live, built with React and hosted on Render. The name, <strong>E</strong>ducational <strong>T</strong>echnology <strong>H</strong>ub for <strong>I</strong>ndonesian <strong>C</strong>ommunity, folds back into the AECT definition of the field itself: the <em>ethic</em>al study and application of theory and practice. It runs on five main menus behind a public landing page:</p>
+        <ul>
+          <li><strong>Explore</strong>: the logged-in home, with recent activity, recommendations, notifications, analytics, and bookmarks.</li>
+          <li><strong>ThinkTank</strong>: the community learning center, where members share and read learning content and resources.</li>
+          <li><strong>Hub</strong>: the community core, with forum, mentorship matching, member directory, and events.</li>
+          <li><strong>Innovation</strong>: member projects and collaborative design challenges for hands-on, practical experience.</li>
+          <li><strong>Career</strong>: Indonesian EdTech trends, a career toolkit (CV, resume, portfolio), job opportunities, and continuing-education resources.</li>
+        </ul>
+
+        <p><a href="https://ethic-5yr7.onrender.com" class="btn-primary" target="_blank" rel="noopener">Visit ETHIC live →</a></p>
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">High-fidelity prototype screens</div>
-          <div class="cip-hint">Replace with your actual screenshot or deliverable</div>
+          <div class="cip-label">ETHIC final prototype: the five menus</div>
+          <div class="cip-hint">A montage of Explore / ThinkTank / Hub / Innovation / Career from the live build</div>
         </div>
 
         <h2 id="outcomes">Outcomes &amp; Impact</h2>
-        <p><strong>[Your writing goes here]</strong> — How did the prototype test? What feedback came back? What would the next iteration look like?</p>
+        <p>ETHIC was validated through usability testing with a deliberately mixed group (3 students, 2 alumni, 2 industry professionals, and a faculty member) spanning every user type the platform serves. The reception was warm: users found the interface inviting, gave concrete, actionable feedback on menu placement and missing features, and (the line that matters most for a community concept) believed it would meet their needs and encouraged me to make it real.</p>
+        <p>As a capstone, the deliverable isn't adoption numbers; it's a fully-realized design argument backed by primary research, eight grounding theories, three fidelity iterations, and a working build a stranger can open today. It also became a real codebase: ETHIC continues to be developed beyond the thesis, evolving from a UI prototype toward a functioning product.</p>
 
         <h2 id="reflection">Reflection</h2>
         <div class="cs-reflection">
           <div class="cs-reflection-label">Reflection</div>
-          <p><strong>[Your writing goes here]</strong> — What would you do differently? What did this project teach you about designing for community and localization?</p>
+          <p>This project started from my own experience and was confirmed by fellow Educational Technology alumni, which is also its risk: it's easy to design for a frustration you personally feel. Anchoring every decision in 53 student surveys, 69 alumni responses, and faculty interviews was what kept it honest, and the moment I'm proudest of is the website-to-web-app pivot, letting a practitioner's challenge override my first instinct instead of defending it.</p>
+          <p>What I'd treat more rigorously is the distance between a prototype and a product. The build demonstrates the experience convincingly, but it's still mostly UI over basic functionality; proving ETHIC actually narrows the theory-practice gap needs a live, fully-functional version tested with far more users. The roadmap from here is exactly that: a functional web app, broader testing, adoption across Indonesian EdTech programs and into the profession, and eventually a reach beyond Indonesia to the wider ASEAN and Asian community.</p>
         </div>
+
+        <h2 id="references">References</h2>
+        <ul class="cs-refs" style="list-style:none; padding:0; font-size:0.92rem; color:var(--ink-2);">
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">AECT Definition Task Force. (2023). <em>The definition of the field</em>. Association for Educational Communications and Technology.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Ertmer, P. A., &amp; Newby, T. J. (2013). Behaviorism, cognitivism, constructivism: Comparing critical features from an instructional design perspective. <em>Performance Improvement Quarterly, 26</em>(2), 43–71.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Lave, J., &amp; Wenger, E. (1991). <em>Situated learning: Legitimate peripheral participation</em>. Cambridge University Press.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Siemens, G. (2004). <em>Connectivism: A learning theory for the digital age</em>. Elearnspace.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em;">Ryan, R. M., &amp; Deci, E. L. (2000). Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being. <em>American Psychologist, 55</em>(1), 68–78.</li>
+        </ul>
 
         <nav class="cs-nav" aria-label="Case study navigation">
           <div class="cs-nav-item">
-            <span class="cs-nav-dir">← Previous</span><a href="/work/nsei-dashboard"><div class="cs-nav-title">NSEI Dashboard</div></a>
+            <span class="cs-nav-dir">← Previous</span><a href="/work/ypkbi-admission-suite"><div class="cs-nav-title">YPKBI Admission Suite</div></a>
           </div>
           <div class="cs-nav-item next">
             <span class="cs-nav-dir">Next →</span><a href="/work/nexus-insight"><div class="cs-nav-title">Nexus Insight</div></a>
@@ -111,8 +140,27 @@
         <div class="cs-sidebar-block">
           <h3>Quick facts</h3>
           <div class="cs-sidebar-facts">
-            <div class="cs-sf-row"><span class="cs-sf-label">Role</span><span class="cs-sf-val">UX Designer · Graduate Coursework, NYU</span></div>
-            <div class="cs-sf-row"><span class="cs-sf-label">Year</span><span class="cs-sf-val">2024 · NYU Graduate Coursework</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Role</span><span class="cs-sf-val">Learning Experience Designer · solo capstone</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Year</span><span class="cs-sf-val">2025 · NYU Steinhardt (LTXD)</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Built with</span><span class="cs-sf-val">React · hosted on Render · Figma research &amp; prototyping</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Type</span><span class="cs-sf-val">Capstone design thesis → working prototype</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Live demo</span><span class="cs-sf-val"><a href="https://ethic-5yr7.onrender.com" target="_blank" rel="noopener">ethic-5yr7.onrender.com →</a></span></div>
+          </div>
+        </div>
+        <div class="cs-sidebar-block">
+          <h3>Research base</h3>
+          <div class="cs-sidebar-facts">
+            <div class="cs-sf-row"><span class="cs-sf-label">Students</span><span class="cs-sf-val">53 surveyed · 11 interviewed</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Alumni</span><span class="cs-sf-val">69 survey responses</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Faculty</span><span class="cs-sf-val">9 interviewed</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Testing</span><span class="cs-sf-val">3 fidelity rounds + usability test (students, alumni, professionals, faculty)</span></div>
+          </div>
+        </div>
+        <div class="cs-sidebar-block">
+          <h3>Grounded in</h3>
+          <div class="cs-sidebar-facts">
+            <div class="cs-sf-row"><span class="cs-sf-label">Core</span><span class="cs-sf-val">Community of Practice (Lave &amp; Wenger)</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Plus</span><span class="cs-sf-val">Constructivism · Social Constructivism · Connectivism · Situated Learning · Social Learning · Cognitive Apprenticeship · Self-Determination Theory</span></div>
           </div>
         </div>
         <div class="cs-sidebar-block">
@@ -123,6 +171,7 @@
             <li><a href="#solution">The Solution</a></li>
             <li><a href="#outcomes">Outcomes &amp; Impact</a></li>
             <li><a href="#reflection">Reflection</a></li>
+            <li><a href="#references">References</a></li>
           </ul>
         </div>
       </aside>

@@ -62,13 +62,13 @@
       <article class="cs-narrative">
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Affectris — cover image</div>
+          <div class="cip-label">Affectris cover image</div>
           <div class="cip-hint">Screenshot of the game running with the live webcam expression-detection panel</div>
         </div>
 
         <h2 id="context">Context &amp; Problem</h2>
         <p>The idea started with a single finding. Butler and colleagues (2020) reported that playing Tetris could disrupt <em>memory consolidation</em>, the process by which intrusive, traumatic memories get locked in, and was associated with increased hippocampal volume in patients with combat-related PTSD. The game wasn't entertainment in that study; it was a cognitive intervention, using a demanding visuospatial task to occupy the mind at exactly the moment a memory would otherwise settle.</p>
-        <p>That raised a question for me: if the <em>cognitive</em> load of Tetris is doing therapeutic work, what happens when you add an <em>embodied</em> one on top of it? Picard's chapter "Emotions Are Physical and Cognitive" (2000) frames feeling as something the body does, not just something the mind registers, emotion and cognition are interwoven, not stacked. The facial-feedback idea runs the same direction: acting out an expression can feed back into the emotion itself.</p>
+        <p>That raised a question for me: if the <em>cognitive</em> load of Tetris is doing therapeutic work, what happens when you add an <em>embodied</em> one on top of it? Picard's chapter "Emotions Are Physical and Cognitive" (2000) frames feeling as something the body does, not just something the mind registers: emotion and cognition are interwoven, not stacked. The facial-feedback idea runs the same direction: acting out an expression can feed back into the emotion itself.</p>
         <p>So the hypothesis behind <strong>Affectris</strong> was this: if a player has to physically perform emotions while playing, not merely feel them, that embodied act might reinforce the emotions and, in turn, deepen the memory-disrupting effect the research already points to. The audience is general, but the project sits squarely on that PTSD-and-anxiety research lineage.</p>
         <p>The design problem, then, wasn't "how do we read the player's mood." It was the inverse: <em>how do we make the player's face the controller</em>, turning expression from something the system passively detects into something the game actively requires.</p>
 
@@ -84,7 +84,7 @@
 
         <h2 id="solution">The Solution</h2>
         <p><strong>Affectris</strong> (affect + Tetris) is a working browser game. A webcam feed runs through real-time face-api expression detection; each detected expression maps to one of the seven tetrominoes, so the player drives the game with their face instead of the keyboard. A live readout of what the model is detecting keeps the otherwise-invisible recognition legible, giving the player a tight loop to calibrate their expressions against.</p>
-        <p>It's deliberately demanding to play. Tetris already asks for sustained visuospatial attention; layering expression-control on top means holding the board in your head <em>and</em> performing emotions with your face at the same time. That double load is the whole point, it's where the embodied-affect premise stops being a citation and becomes something you physically feel.</p>
+        <p>It's deliberately demanding to play. Tetris already asks for sustained visuospatial attention; layering expression-control on top means holding the board in your head <em>and</em> performing emotions with your face at the same time. That double load is the whole point: it's where the embodied-affect premise stops being a citation and becomes something you physically feel.</p>
 
         <p><a href="https://editor.p5js.org/znurfzh/full/tn05MiwHj" class="btn-primary" target="_blank" rel="noopener">▶ Play the live build</a></p>
 
@@ -100,7 +100,7 @@
         <h2 id="reflection">Reflection</h2>
         <div class="cs-reflection">
           <div class="cs-reflection-label">Reflection</div>
-          <p>The version I built is the <em>expressive</em> half of the idea, the player drives the game by producing affect. The half I'm most curious about next is the <em>reactive</em> one: an Affectris that closes the loop, reading genuine emotional state and adapting difficulty, pacing, and challenge in response. I'd also add head-movement as a second control axis and build out more varied challenges, so the affective demand shifts over a session instead of staying flat.</p>
+          <p>The version I built is the <em>expressive</em> half of the idea: the player drives the game by producing affect. The half I'm most curious about next is the <em>reactive</em> one: an Affectris that closes the loop, reading genuine emotional state and adapting difficulty, pacing, and challenge in response. I'd also add head-movement as a second control axis and build out more varied challenges, so the affective demand shifts over a session instead of staying flat.</p>
           <p>What I'm most proud of is the scoping discipline, choosing a known game and a single clean mapping so one idea could actually ship in playable form. What I'd treat more rigorously is the claim itself: the prototype proves embodied-affect control is buildable and genuinely felt, but whether it <em>strengthens</em> the therapeutic effect the way the theory predicts is a question only a real study, not a proof of concept, could answer. For now, Affectris is the playable hypothesis.</p>
         </div>
 
@@ -134,8 +134,8 @@
         <div class="cs-sidebar-block">
           <h3>Grounded in</h3>
           <div class="cs-sidebar-facts">
-            <div class="cs-sf-row"><span class="cs-sf-label">Affect</span><span class="cs-sf-val">Picard (2000) — "Emotions Are Physical and Cognitive"</span></div>
-            <div class="cs-sf-row"><span class="cs-sf-label">Task</span><span class="cs-sf-val">Butler et al. (2020) — Tetris disrupts memory consolidation in PTSD</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Affect</span><span class="cs-sf-val">Picard (2000): "Emotions Are Physical and Cognitive"</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Task</span><span class="cs-sf-val">Butler et al. (2020): Tetris disrupts memory consolidation in PTSD</span></div>
           </div>
         </div>
         <div class="cs-sidebar-block">
