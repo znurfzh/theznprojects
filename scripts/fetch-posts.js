@@ -347,6 +347,7 @@ const TOPIC_MAP = {
   'design':          'design',
   'behind the build':'build',
   'misc yapping':    'misc',
+  'books':           'books',
 };
 function tagToTopic(tag) {
   return TOPIC_MAP[tag.toLowerCase()] ?? tag.toLowerCase().split(' ')[0];

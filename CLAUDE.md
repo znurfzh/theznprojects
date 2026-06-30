@@ -206,7 +206,7 @@ Every post (manual or Notion-generated) includes:
 ### Notion CMS post generation (`scripts/fetch-posts.js`)
 - Filters Notion DB for `Status = Published` (Select property, not Status property)
 - TOPIC_MAP normalises tags: "Learning Design" → "learning", "Design" → "design",
-  "Behind the Build" → "build", "Misc Yapping" → "misc"
+  "Behind the Build" → "build", "Misc Yapping" → "misc", "Books" → "books"
 - Writes `.notion-generated` marker in each post dir; cleanup loop removes stale dirs
 - Generates `megazn/index.html` between `<!-- POSTS_START -->` and `<!-- POSTS_END -->`
 - Shows `.posts-empty` state when 0 published posts
@@ -219,7 +219,7 @@ Every post (manual or Notion-generated) includes:
 | Project | Status | Notes |
 |---|---|---|
 | YPKBI Admission Suite | ✅ Fully written | Flagship — narrative + all sections |
-| NSEI Dashboard | ⬜ Stub | Awaiting your content |
+| NSEI Dashboard | 🚫 Removed from index | Project not a done deal (Danantara); stub page still exists at /work/nsei-dashboard but not linked |
 | ETHIC | ⬜ Stub | Awaiting your content |
 | Nexus Insight | ⬜ Stub | Awaiting your content |
 | Affectris | ⬜ Stub | Awaiting your content |
@@ -239,16 +239,16 @@ education, experience, site history (incl. logo display), acknowledgements
 
 ## Project order (work index)
 1. YPKBI Admission Suite (most recent, featured hero card)
-2. NSEI Dashboard
-3. ETHIC
-4. Nexus Insight
-5. Affectris
-6. Cognizance
+2. ETHIC
+3. Nexus Insight
+4. Affectris
+5. Cognizance
+(NSEI removed — project not confirmed, can be re-added later)
 
 ---
 
 ## Still to build
-- **Case study content** — write the 5 stub case studies (NSEI, ETHIC, Nexus Insight,
+- **Case study content** — write the 4 stub case studies (ETHIC, Nexus Insight,
   Affectris, Cognizance) and replace `cs-img-placeholder` divs with real screenshots
 - **Resume** — add to `/assets/resume.pdf`; linked from about page (link exists, file missing)
 - **megaZN post writing** — write the two scaffolded manual posts
