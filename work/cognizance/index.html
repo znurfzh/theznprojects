@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cognizance — Socratic Method web application for learning design. Case study by Zulsyika Nurfaizah.">
+  <meta name="description" content="Cognizance: an AI reading companion that uses the Socratic method to make learners think instead of handing them answers. Case study by Zulsyika Nurfaizah, prompt engineer on a graduate team project.">
   <title>Cognizance — theznprojects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,700;1,9..144,800&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -33,7 +33,8 @@
       <span class="tag tag-ux">UX Design</span>
     </div>
     <h1 class="cs-title">Cognizance</h1>
-    <p class="cs-subtitle">A Socratic Method web application for learning — exploring how dialogue-based pedagogy can be scaffolded through digital interaction design.</p>
+    <p class="cs-subtitle">An AI reading companion that uses the Socratic method to make the learner do the thinking, not the chatbot. A graduate team project where I engineered the system prompt that turns a general-purpose AI into a grounded, patient tutor.</p>
+    <a href="https://gemini.google.com/gem/1Xr0kH83yW4VxKa14oijRTkD_efTs1_VC?usp=sharing" class="btn-primary" target="_blank" rel="noopener" style="margin-top:1.5rem;">Try the Socratic GEM →</a>
   </div>
 </header>
 
@@ -42,19 +43,19 @@
     <div class="cs-tldr-grid">
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Problem</div>
-        <div class="cs-tldr-val">How do you translate the Socratic Method — a profoundly relational form of inquiry — into a digital learning experience that still does what it's supposed to?</div>
+        <div class="cs-tldr-val">Academic reading overwhelms students, and the scaffolding that builds real comprehension does not scale to large courses. Meanwhile, AI tools like NotebookLM just hand over summaries and answers, which can deepen passive reading. How do you build an AI reading companion that makes learners think rather than thinking for them?</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">My Role</div>
-        <div class="cs-tldr-val">Learning Experience Designer · Graduate Coursework, NYU</div>
+        <div class="cs-tldr-val">Prompt Engineer &amp; Early Prototyping · Graduate team of three, NYU (Experience Design &amp; AI). I engineered the Socratic system prompt that drives the tutor, and built the early interaction prototypes.</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Outcome</div>
-        <div class="cs-tldr-val">A web application that scaffolds Socratic dialogue as an interactive learning experience, exploring how pedagogical questioning can be designed into digital interfaces.</div>
+        <div class="cs-tldr-val">Cognizance, "your deep-learning pal": a web app pairing a document reader with a Socratic AI chat, an auto-generated concept mindmap, and a Simple / Deep explanation toggle. A working prototype demoed live, with the pedagogy encoded in an engineered system prompt (hidden learning plan, backward-design tutoring loop).</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">Timeframe</div>
-        <div class="cs-tldr-val">2023 · NYU Graduate Coursework</div>
+        <div class="cs-tldr-val">2025 · NYU graduate coursework (Experience Design &amp; Artificial Intelligence)</div>
       </div>
     </div>
   </div>
@@ -66,37 +67,55 @@
       <article class="cs-narrative">
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Cognizance — cover image</div>
-          <div class="cip-hint">Replace with your actual screenshot or mockup</div>
+          <div class="cip-label">Cognizance cover image</div>
+          <div class="cip-hint">The split-screen reading view (document on the left, Socratic AI assistant on the right) or the homepage "Welcome to Cognizance" card</div>
         </div>
 
         <h2 id="context">Context &amp; Problem</h2>
-        <p><strong>[Your writing goes here]</strong> — What motivated this project? What does the Socratic Method actually require to work, and where does that break down in digital learning contexts?</p>
+        <p>Reading assignments are the backbone of a college course, and also one of the easiest places for understanding to quietly fall apart. Academic texts are dense, discipline-specific, and abstract (Snow, 2002), and many students cope by reading passively: skimming, highlighting, never quite connecting the text to the larger course themes (Chi, 2009). The fix is well known. Scaffolding, the kind of guided, progressive support a good tutor gives, reliably improves comprehension (Wood, Bruner &amp; Ross, 1976). The catch is that it does not scale. One instructor cannot sit beside three hundred students and ask each of them the right next question.</p>
+        <p>This was a team project for NYU's Experience Design and Artificial Intelligence course (three of us: Danira Khatwani, Rae Ruan, and me). We started by surveying adult learners about how they actually study, and the results pointed somewhere specific. People do not study <em>inside</em> the LMS; they treat it as a filing cabinet, pull readings out into a document tool, then bounce over to ChatGPT, Gemini, or NotebookLM to summarize and paraphrase. They struggle most with information overload, with remembering material over time, and (for half of them) with thinking critically about it at all. They already lean heavily on AI.</p>
+        <p>That gave us our pivot. There was no point bolting AI onto the LMS; the real opportunity was a dedicated reading-comprehension companion. But it also surfaced the trap. The AI tools people already use are optimized to <em>end</em> the thinking: ask a question, get an answer, move on. If we built one more of those, we would be accelerating exactly the passive reading the research warns about. So the guiding question became the one we wanted to answer well: <em>how might we use the Socratic method to make an AI guide comprehension instead of replacing it?</em></p>
 
         <h2 id="process">Process &amp; Decisions</h2>
-        <p><strong>[Your writing goes here]</strong> — How did you define what "Socratic" means as an interaction pattern? What frameworks or research informed the design? What did early prototypes reveal?</p>
+        <p><strong>Treat the pedagogy as a prompt-engineering problem.</strong> On a tool like this, the teaching does not live in the interface; it lives in how the AI behaves. An identical chat window is either a tutor or an answer machine depending entirely on what the model has been told to do. So the heart of my work, as the team's prompt engineer, was designing that behavior: writing the instructions that would make a general model hold a Socratic line.</p>
+        <p><strong>Prototype the hard part first.</strong> Before anything was a product, I built throwaway prototypes to test the one risky assumption: <em>can an LLM actually resist giving the answer?</em> I wired a looping chat interaction to the Gemini API in Google Colab, sketched a Socratic interaction UI, and stood up a rough split-screen reader in Glitch. The telling test was adversarial. Told a learner "thinks the earth is flat," the model did not lecture or correct; it asked what the most compelling evidence would be, then nudged toward what we should consider when judging whether a long-held belief is actually true. That was the proof the approach could work.</p>
+        <p><strong>Plan backward from understanding.</strong> We structured the whole tool with backward design (Wiggins &amp; McTighe, 2005): first naming the results we wanted (deeper comprehension, critical thinking, the ability to connect and synthesize ideas), then the evidence we would accept (the quality of a learner's Socratic responses, whether they can articulate and apply a concept), and only then the interactions. The Socratic questions were not decoration; they were the assessment.</p>
+        <p><strong>Encode a lesson plan inside the system prompt.</strong> The core deliverable was the prompt itself, built and tested as a <a href="https://gemini.google.com/gem/1Xr0kH83yW4VxKa14oijRTkD_efTs1_VC?usp=sharing" target="_blank" rel="noopener">Gemini GEM</a> (still live, and the one piece of the project you can try yourself). It instructs the model to act as a "deep-learning pal" that must question in the Socratic method and stay strictly grounded in the learner's uploaded document. The part I am proudest of is structural: the model first analyzes the document, breaks it into subtopics, and writes a <em>hidden</em> YAML learning plan (kept inside markup the learner never sees), surfacing only a friendly checklist. From then on it tutors one substep at a time, and silently begins each turn by updating a <code>learning_plan_state</code> note so it remembers where it is in the plan. It picks learning activities to fit the topic (a debate or role-play for a science reading, a vocabulary game for language), checks understanding before advancing, and adapts between a Simple and a Deep explanation level. In other words, an instructional designer's lesson plan, sequencing, scaffolding, formative checks and all, written as instructions to a model so it stays a tutor instead of collapsing into a summary.</p>
+        <p>That prompt became the brain of the finished product. When the team built the app, the AI ran on the system prompt I had engineered and tested.</p>
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Design process / interaction map / wireframe</div>
-          <div class="cip-hint">Replace with your actual work artifact</div>
+          <div class="cip-label">The Socratic AI chat in action</div>
+          <div class="cip-hint">The "Can you give me an example?" exchange showing the document-grounded answer and suggested follow-up prompts, or a snippet of the Gemini GEM prompt itself</div>
         </div>
 
         <h2 id="solution">The Solution</h2>
-        <p><strong>[Your writing goes here]</strong> — Walk through the application: how the dialogue scaffolding works, the question structure, how the interface guides learners without just giving them answers.</p>
+        <p><strong>Cognizance</strong> is the working prototype the team built around that prompt, vibe-coded from a Replit build into Cursor for refinement and deployed back through Replit (a React and Express app under the hood). My teammate Rae led the final engineering; my system prompt drove its AI. What matters is the experience, and every part of it is bent toward making the learner do cognitive work.</p>
+        <p>You upload a PDF or document and land in a <strong>split-screen reading view</strong>: the text on the left, an AI reading assistant on the right. The assistant opens not with a summary but with a question, and offers suggested follow-ups that keep the learner in an active stance ("How does this relate to the main themes?", "Help me think critically about this"). Every answer is <strong>grounded in the document and cited</strong>, so the learner can see where a claim came from and judge it. A <strong>Simple / Deep toggle</strong> shifts the explanation level between everyday, grade-school-friendly language and full college-level depth with proper terminology. And a separate <strong>Mindmap view</strong> auto-generates a concept map of the document, central themes radiating out into clickable nodes, so the structure of a dense reading becomes something you can see at a glance rather than reconstruct from prose.</p>
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Final application screenshots</div>
-          <div class="cip-hint">Replace with your actual screenshot or deliverable</div>
+          <div class="cip-label">The Mindmap view</div>
+          <div class="cip-hint">The auto-generated concept map (central topic with branching, clickable nodes) from the document</div>
         </div>
 
         <h2 id="outcomes">Outcomes &amp; Impact</h2>
-        <p><strong>[Your writing goes here]</strong> — How did learners interact with it? What did testing reveal about where the Socratic scaffolding worked and where it didn't?</p>
+        <p>Cognizance reached a working, demo-able prototype and ran live at our final presentation. I want to be straight about its status: this is a graduate capstone, not a launched product. We designed a thorough evaluation plan, pre and post comprehension tests, affect surveys, activity logging, and thematic coding, built around a shared reading on Sesame Street and race, but we did not get to run it at scale. And the prototype is now offline; it was hosted on a teammate's subscription and only kept live for the demo, so there is no public link to share.</p>
+        <p>The durable artifact is the system prompt, and it outlived the app: the <a href="https://gemini.google.com/gem/1Xr0kH83yW4VxKa14oijRTkD_efTs1_VC?usp=sharing" target="_blank" rel="noopener">Socratic GEM</a> is still live and usable today. It is a reusable blueprint for a Socratic tutor that stays grounded in a source, hides its lesson plan, and tracks its own progress, and it would carry to any topic or document. Testing it also produced an honest finding worth keeping: the model does not always obey. It drifts off the structured flow and goes freeform, especially as a conversation runs long. The gap between what the prompt intends and what the model actually does is the real frontier here, and naming it precisely is part of the result.</p>
 
         <h2 id="reflection">Reflection</h2>
         <div class="cs-reflection">
           <div class="cs-reflection-label">Reflection</div>
-          <p><strong>[Your writing goes here]</strong> — What would you do differently? What did this project teach you about the limits and possibilities of formalizing dialogue as a design pattern?</p>
+          <p>The lesson I took from this is that with large language models, a lot of learning design has quietly become prompt design. Writing the Gemini GEM was lesson planning by another name: I was sequencing subtopics, scaffolding substeps, building in formative checks, and choosing activities, just expressed as instructions to a model instead of a slide deck. It reframed prompt engineering for me as an instructional-design discipline, not a technical trick.</p>
+          <p>The genuinely hard part was never getting an AI to answer; it was getting it to <em>withhold</em> the answer and ask the right next question instead. The flat-earth test was the moment I believed the Socratic approach could hold. What I would want next is the part we ran out of time for: grounding the responses more reliably with retrieval (RAG) so the tutor cites better, tightening the prompt so the model actually holds its lesson plan, and finally running the evaluation we designed. Because the honest tension in a tool like this is that an AI built to make you think can still be talked past, and the only measure that settles it is whether comprehension actually improved. We designed for that. Measuring it is the next step.</p>
         </div>
+
+        <h2 id="references">References</h2>
+        <ul class="cs-refs" style="list-style:none; padding:0; font-size:0.92rem; color:var(--ink-2);">
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Chi, M. T. H. (2009). Active-constructive-interactive: A conceptual framework for differentiating learning activities. <em>Topics in Cognitive Science, 1</em>(1), 73–105.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Graesser, A. C., McNamara, D. S., &amp; VanLehn, K. (2005). Scaffolding deep comprehension strategies through automated questioning. <em>Applied Cognitive Psychology, 19</em>(5), 579–594.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Snow, C. (2002). <em>Reading for understanding: Toward an R&amp;D program in reading comprehension.</em> RAND Corporation.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Wiggins, G., &amp; McTighe, J. (2005). <em>Understanding by design</em> (2nd ed.). ASCD.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em;">Wood, D., Bruner, J. S., &amp; Ross, G. (1976). The role of tutoring in problem-solving. <em>Journal of Child Psychology and Psychiatry, 17</em>(2), 89–100.</li>
+        </ul>
 
         <nav class="cs-nav" aria-label="Case study navigation">
           <div class="cs-nav-item">
@@ -112,8 +131,28 @@
         <div class="cs-sidebar-block">
           <h3>Quick facts</h3>
           <div class="cs-sidebar-facts">
-            <div class="cs-sf-row"><span class="cs-sf-label">Role</span><span class="cs-sf-val">Learning Experience Designer · Graduate Coursework, NYU</span></div>
-            <div class="cs-sf-row"><span class="cs-sf-label">Year</span><span class="cs-sf-val">2023 · NYU Graduate Coursework</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Role</span><span class="cs-sf-val">Prompt Engineer &amp; Early Prototyping</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Year</span><span class="cs-sf-val">2025 · NYU (Experience Design &amp; AI)</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Team</span><span class="cs-sf-val">Danira Khatwani, Rae Ruan, Zulsyika Nurfaizah</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Built with</span><span class="cs-sf-val">Gemini GEM · Google Colab · Glitch · Replit · Cursor · React / Express</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Status</span><span class="cs-sf-val">Prototype offline (was live for the final demo)</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Try it</span><span class="cs-sf-val"><a href="https://gemini.google.com/gem/1Xr0kH83yW4VxKa14oijRTkD_efTs1_VC?usp=sharing" target="_blank" rel="noopener">The Socratic GEM (still live)</a></span></div>
+          </div>
+        </div>
+        <div class="cs-sidebar-block">
+          <h3>My contribution</h3>
+          <div class="cs-sidebar-facts">
+            <div class="cs-sf-row"><span class="cs-sf-label">Core</span><span class="cs-sf-val">The Gemini GEM Socratic system prompt: the tutor's brain</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Prototypes</span><span class="cs-sf-val">Socratic interaction UI, Glitch split-screen reader, looping chat in Google Colab</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Also</span><span class="cs-sf-val">Survey and insight synthesis, final report structure</span></div>
+          </div>
+        </div>
+        <div class="cs-sidebar-block">
+          <h3>Design moves</h3>
+          <div class="cs-sidebar-facts">
+            <div class="cs-sf-row"><span class="cs-sf-label">Stance</span><span class="cs-sf-val">Socratic questioning over answers and summaries</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Structure</span><span class="cs-sf-val">Hidden YAML learning plan + backward design (Wiggins &amp; McTighe)</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Adaptivity</span><span class="cs-sf-val">Simple / Deep explanation levels, document-grounded with citations</span></div>
           </div>
         </div>
         <div class="cs-sidebar-block">
@@ -124,6 +163,7 @@
             <li><a href="#solution">The Solution</a></li>
             <li><a href="#outcomes">Outcomes &amp; Impact</a></li>
             <li><a href="#reflection">Reflection</a></li>
+            <li><a href="#references">References</a></li>
           </ul>
         </div>
       </aside>
