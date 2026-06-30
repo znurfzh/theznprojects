@@ -29,7 +29,7 @@
     <a href="/work" class="cs-back">All work</a>
     <div class="cs-header-tags"><span class="tag tag-ld">Learning Design</span><span class="tag tag-ux">UX Design</span></div>
     <h1 class="cs-title">Affectris</h1>
-    <p class="cs-subtitle">A Tetris game with basic facial expression recognition — adapting the learning experience in real time based on detected affective states.</p>
+    <p class="cs-subtitle">A Tetris game you play with your face. An experiment in <em>embodied affect</em>: research shows Tetris can disrupt traumatic memory, could acting out emotions while you play deepen the effect?</p>
   </div>
 </header>
 
@@ -38,19 +38,19 @@
     <div class="cs-tldr-grid">
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Problem</div>
-        <div class="cs-tldr-val">How do you design a learning experience that responds to how a learner actually feels — not just what they click?</div>
+        <div class="cs-tldr-val">Research shows Tetris can disrupt the memory consolidation behind PTSD. Could an embodied layer, making players physically act out emotions as they play, reinforce those emotions and strengthen the effect?</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">My Role</div>
-        <div class="cs-tldr-val">Learning Experience Designer · Graduate Coursework, NYU</div>
+        <div class="cs-tldr-val">Learning Experience Designer · solo build · Graduate Coursework, NYU</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Outcome</div>
-        <div class="cs-tldr-val">A playable game prototype that detects facial expressions via webcam and adjusts difficulty and feedback in real time based on detected emotional state.</div>
+        <div class="cs-tldr-val">A working prototype in p5.js + face-api.js: a Tetris where seven facial expressions map to the seven tetrominoes, so you control the game with your face via webcam, not the keyboard.</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">Timeframe</div>
-        <div class="cs-tldr-val">2024 · NYU Graduate Coursework</div>
+        <div class="cs-tldr-val">2025 · NYU Graduate Coursework (~4 weeks)</div>
       </div>
     </div>
   </div>
@@ -63,43 +63,52 @@
 
         <div class="cs-img-placeholder">
           <div class="cip-label">Affectris — cover image</div>
-          <div class="cip-hint">Replace with your actual screenshot or mockup</div>
+          <div class="cip-hint">Screenshot of the game running with the live webcam expression-detection panel</div>
         </div>
 
-        <!-- ═══════════════════════════════════════════════════
-             CASE STUDY PLACEHOLDER
-             This case study is waiting for your content.
-             The structure below shows the recommended sections
-             for this type of project — fill in as you go.
-             ═══════════════════════════════════════════════════ -->
-
         <h2 id="context">Context &amp; Problem</h2>
-        <p><strong>[Your writing goes here]</strong> — What was the situation? What problem needed solving? Who was affected and why did it matter?</p>
+        <p>The idea started with a single finding. Butler and colleagues (2020) reported that playing Tetris could disrupt <em>memory consolidation</em>, the process by which intrusive, traumatic memories get locked in, and was associated with increased hippocampal volume in patients with combat-related PTSD. The game wasn't entertainment in that study; it was a cognitive intervention, using a demanding visuospatial task to occupy the mind at exactly the moment a memory would otherwise settle.</p>
+        <p>That raised a question for me: if the <em>cognitive</em> load of Tetris is doing therapeutic work, what happens when you add an <em>embodied</em> one on top of it? Picard's chapter "Emotions Are Physical and Cognitive" (2000) frames feeling as something the body does, not just something the mind registers, emotion and cognition are interwoven, not stacked. The facial-feedback idea runs the same direction: acting out an expression can feed back into the emotion itself.</p>
+        <p>So the hypothesis behind <strong>Affectris</strong> was this: if a player has to physically perform emotions while playing, not merely feel them, that embodied act might reinforce the emotions and, in turn, deepen the memory-disrupting effect the research already points to. The audience is general, but the project sits squarely on that PTSD-and-anxiety research lineage.</p>
+        <p>The design problem, then, wasn't "how do we read the player's mood." It was the inverse: <em>how do we make the player's face the controller</em>, turning expression from something the system passively detects into something the game actively requires.</p>
 
         <h2 id="process">Process &amp; Decisions</h2>
-        <p><strong>[Your writing goes here]</strong> — How did you approach it? What did you discover? What key decisions did you make and why?</p>
+        <p><strong>Hold the game constant.</strong> I didn't want to invent a new game and a new interaction model at the same time. Tetris was already validated by the research I was building on, and it's instantly legible, so I kept it fixed and put all the design pressure on the one variable that mattered: the affective interface. Rather than build Tetris from scratch, I started from existing p5.js Tetris sketches and face-api examples, and focused my work on fusing the two.</p>
+        <p><strong>Seven expressions, seven pieces.</strong> The mapping fell into place almost too neatly. Standard Tetris has seven tetrominoes; face-api detects seven basic expressions: neutral, happy, sad, angry, surprised, fearful, disgusted. I mapped one expression to each piece, so producing a face is how you summon and steer a block. Expression stops being telemetry the system reads in the background and becomes the control surface itself.</p>
+        <p><strong>The build was a platform odyssey.</strong> The honest version of the process is a string of dead ends. I built the first version in the p5.js web editor, the video feed worked, and I simulated expressions with letter keys, but wiring in real face-api detection broke: the editor wouldn't accept the model's <code>.bin</code> and <code>.json</code> weight files past its 5&nbsp;MB limit. I moved to OpenProcessing (where we'd used face-api in class); there the <code>.json</code> files kept returning empty. I moved again, to Glitch, restructuring the code for yet another file layout. Face-api connected but still couldn't find its models, until I tracked down an alternative, actively-maintained face-api build, swapped it in, and it finally worked. (It probably would have run on the earlier platforms too, which is its own small lesson.) From there I added the emotion-detection logic, and the game was real.</p>
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Process / research / wireframe image</div>
-          <div class="cip-hint">Replace with your actual work artifact</div>
+          <div class="cip-label">Mapping diagram, seven expressions → seven tetrominoes</div>
+          <div class="cip-hint">Show each expression paired with its piece, plus the face-api detection overlay</div>
         </div>
 
         <h2 id="solution">The Solution</h2>
-        <p><strong>[Your writing goes here]</strong> — What did you build or design? Walk through the key elements and the reasoning behind them.</p>
+        <p><strong>Affectris</strong> (affect + Tetris) is a working browser game. A webcam feed runs through real-time face-api expression detection; each detected expression maps to one of the seven tetrominoes, so the player drives the game with their face instead of the keyboard. A live readout of what the model is detecting keeps the otherwise-invisible recognition legible, giving the player a tight loop to calibrate their expressions against.</p>
+        <p>It's deliberately demanding to play. Tetris already asks for sustained visuospatial attention; layering expression-control on top means holding the board in your head <em>and</em> performing emotions with your face at the same time. That double load is the whole point, it's where the embodied-affect premise stops being a citation and becomes something you physically feel.</p>
+
+        <p><a href="https://editor.p5js.org/znurfzh/full/tn05MiwHj" class="btn-primary" target="_blank" rel="noopener">▶ Play the live build</a></p>
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Final solution / deliverable image</div>
-          <div class="cip-hint">Replace with your actual screenshot or deliverable</div>
+          <div class="cip-label">The prototype in play</div>
+          <div class="cip-hint">Webcam + board side by side, mid-game, with an expression actively driving a piece</div>
         </div>
 
         <h2 id="outcomes">Outcomes &amp; Impact</h2>
-        <p><strong>[Your writing goes here]</strong> — What was the result? What changed? How do you know it worked?</p>
+        <p>The deliverable is a fully functioning expression-detection Tetris game, built solo, end to end, in about four weeks. As a coursework prototype its value isn't usage metrics; it's that it makes an abstract argument testable. You can hand it to someone, watch them play, and have a concrete artifact to think with about what it means to put affect at the <em>center</em> of an interface rather than at its edges.</p>
+        <p>It doubled as a real engineering exercise: integrating a live ML model into an interactive p5.js game, and, more memorably, debugging that integration across three hosting platforms until it held together in the browser.</p>
 
         <h2 id="reflection">Reflection</h2>
         <div class="cs-reflection">
           <div class="cs-reflection-label">Reflection</div>
-          <p><strong>[Your writing goes here]</strong> — What would you do differently? What did you learn? What are you most proud of?</p>
+          <p>The version I built is the <em>expressive</em> half of the idea, the player drives the game by producing affect. The half I'm most curious about next is the <em>reactive</em> one: an Affectris that closes the loop, reading genuine emotional state and adapting difficulty, pacing, and challenge in response. I'd also add head-movement as a second control axis and build out more varied challenges, so the affective demand shifts over a session instead of staying flat.</p>
+          <p>What I'm most proud of is the scoping discipline, choosing a known game and a single clean mapping so one idea could actually ship in playable form. What I'd treat more rigorously is the claim itself: the prototype proves embodied-affect control is buildable and genuinely felt, but whether it <em>strengthens</em> the therapeutic effect the way the theory predicts is a question only a real study, not a proof of concept, could answer. For now, Affectris is the playable hypothesis.</p>
         </div>
+
+        <h2 id="references">References</h2>
+        <ul class="cs-refs" style="list-style:none; padding:0; font-size:0.92rem; color:var(--ink-2);">
+          <li style="padding-left:1.5em; text-indent:-1.5em; margin-bottom:0.7em;">Butler, O., Herr, K., Willmund, G., Gallinat, J., Kühn, S., &amp; Zimmermann, P. (2020). Trauma, treatment and Tetris: video gaming increases hippocampal volume in male patients with combat-related posttraumatic stress disorder. <em>Journal of Psychiatry and Neuroscience, 45</em>(4), 279–287.</li>
+          <li style="padding-left:1.5em; text-indent:-1.5em;">Picard, R. W. (2000). Emotions are physical and cognitive. In <em>Affective Computing</em>. MIT Press.</li>
+        </ul>
 
         <nav class="cs-nav" aria-label="Case study navigation">
           <div class="cs-nav-item">
@@ -115,8 +124,18 @@
         <div class="cs-sidebar-block">
           <h3>Quick facts</h3>
           <div class="cs-sidebar-facts">
-            <div class="cs-sf-row"><span class="cs-sf-label">Role</span><span class="cs-sf-val">Learning Experience Designer · Graduate Coursework, NYU</span></div>
-            <div class="cs-sf-row"><span class="cs-sf-label">Year</span><span class="cs-sf-val">2024 · NYU Graduate Coursework</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Role</span><span class="cs-sf-val">Learning Experience Designer · solo build</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Year</span><span class="cs-sf-val">2025 · NYU Graduate Coursework</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Built with</span><span class="cs-sf-val">p5.js · face-api.js · webcam · runs in-browser</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Type</span><span class="cs-sf-val">Playable proof-of-concept prototype</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Live demo</span><span class="cs-sf-val"><a href="https://editor.p5js.org/znurfzh/full/tn05MiwHj" target="_blank" rel="noopener">Play Affectris →</a></span></div>
+          </div>
+        </div>
+        <div class="cs-sidebar-block">
+          <h3>Grounded in</h3>
+          <div class="cs-sidebar-facts">
+            <div class="cs-sf-row"><span class="cs-sf-label">Affect</span><span class="cs-sf-val">Picard (2000) — "Emotions Are Physical and Cognitive"</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Task</span><span class="cs-sf-val">Butler et al. (2020) — Tetris disrupts memory consolidation in PTSD</span></div>
           </div>
         </div>
         <div class="cs-sidebar-block">
@@ -127,6 +146,7 @@
             <li><a href="#solution">The Solution</a></li>
             <li><a href="#outcomes">Outcomes &amp; Impact</a></li>
             <li><a href="#reflection">Reflection</a></li>
+            <li><a href="#references">References</a></li>
           </ul>
         </div>
       </aside>
