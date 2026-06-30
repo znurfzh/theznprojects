@@ -120,6 +120,9 @@
 .cs-narrative em     { font-style: italic; }
 .cs-narrative a      { color: var(--blue); border-bottom: 1px solid var(--blue-mid); transition: border-color var(--t); }
 .cs-narrative a:hover { border-color: var(--blue); }
+/* Buttons inside the narrative keep their own light text (no link recolor/underline) */
+.cs-narrative a.btn-primary,
+.cs-narrative a.btn-primary:hover { color: var(--white); border-bottom: none; }
 .cs-narrative hr     { border: none; border-top: 1px solid var(--border); margin: 52px 0; }
 
 .cs-narrative blockquote {
