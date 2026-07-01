@@ -342,6 +342,42 @@
 }
 .post-callout p { margin: 0; color: rgba(255,255,255,0.65); }
 
+/* Like button */
+.post-like {
+  display: flex; align-items: center; gap: 14px;
+  flex-wrap: wrap; margin: 48px 0 0;
+}
+.post-like-btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--body); font-size: 0.9rem; font-weight: 700;
+  padding: 10px 18px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.7);
+  cursor: pointer; line-height: 1;
+  transition: background var(--t), color var(--t), border-color var(--t), transform var(--t);
+}
+.post-like-btn:hover {
+  background: rgba(255,255,255,0.12);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.3);
+}
+.post-like-btn:active { transform: scale(0.96); }
+.post-like-heart {
+  width: 18px; height: 18px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  transition: fill var(--t), stroke var(--t);
+}
+.post-like-count { min-width: 1ch; font-variant-numeric: tabular-nums; }
+.post-like-btn.liked {
+  background: rgba(0,99,167,0.18);
+  border-color: var(--blue);
+  color: var(--blue);
+  cursor: default;
+}
+.post-like-btn.liked .post-like-heart { fill: var(--blue); stroke: var(--blue); }
+.post-like-text { font-size: 0.83rem; color: rgba(255,255,255,0.4); }
+
 /* Share bar */
 .post-share {
   display: flex; align-items: center; gap: 12px;

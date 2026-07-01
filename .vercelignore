@@ -1,0 +1,3 @@
+# Apps Script source (backend for megaZN likes) — version-controlled here,
+# but it runs on Google, not Vercel, so keep it out of the static deploy.
+apps-script/

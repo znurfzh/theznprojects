@@ -141,6 +141,15 @@
 
         <hr>
 
+        <!-- Like -->
+        <div class="post-like" data-slug="on-learn-unlearn-relearn">
+          <button class="post-like-btn" type="button" aria-pressed="false" aria-label="Like this post">
+            <svg class="post-like-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.716-4.297-9.428-7.01C.86 12.278.86 9.223 2.572 7.51a4.5 4.5 0 0 1 6.364 0L12 10.574l3.064-3.064a4.5 4.5 0 0 1 6.364 6.364C18.716 16.703 12 21 12 21z"/></svg>
+            <span class="post-like-count" aria-hidden="true">–</span>
+          </button>
+          <span class="post-like-text">Found this worth reading? Give it a like.</span>
+        </div>
+
         <!-- Share -->
         <div class="post-share">
           <span class="post-share-label">Share</span>
@@ -240,6 +249,7 @@
 </footer>
 
 <script src="/assets/base.js"></script>
+<script src="/assets/likes.js"></script>
 <script>
   // Dark nav override
   const nav = document.getElementById('nav');
