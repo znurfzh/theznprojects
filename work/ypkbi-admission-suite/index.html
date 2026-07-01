@@ -17,6 +17,7 @@
   <div class="nav-inner">
     <a href="/" class="nav-logo"><span class="brand-the">the</span><span class="brand-zn">ZN</span><span class="brand-projects">projects</span></a>
     <ul class="nav-links">
+      <li><a href="/">Home</a></li>
       <li><a href="/work" class="active">Work</a></li>
       <li><a href="/megazn">megaZN</a></li>
       <li><a href="/about">About</a></li>
@@ -65,10 +66,8 @@
     <div class="cs-layout">
       <article class="cs-narrative">
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">YPKBI Admission Suite: cover image (the four apps together)</div>
-          <div class="cip-hint">Replace with your actual screenshot or mockup</div>
-        </div>
+        <img class="cs-img" src="/assets/images/ypkbi-cover.png" alt="AdmissionSuite landing page reading 'Every tool you need for admission season', describing four purpose-built web apps built as one cohesive system.">
+        <p class="cs-img-caption">The suite's shared landing page: one entry point framing the four apps as a single system.</p>
 
         <h2 id="context">Context &amp; Problem</h2>
         <p>Every year, SMA Kemala Taruna Bhayangkara runs a new-student admissions selection (SPMB) that is anything but a single test. A candidate moves through a pipeline of stages: an academic aptitude test, an IELTS-style speaking simulation, a physical fitness assessment, a leaderless group discussion, a candidate interview, and a parent interview. Each stage produces its own scores, and at the end a committee has to weigh all of it and decide who gets in.</p>
@@ -119,22 +118,37 @@
         <h2 id="solution">The Solution</h2>
         <p>Four apps, one per stage of the funnel, each named for what it does.</p>
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">The four apps, side by side (E-Proktor / CloudSpeak / DiscussLens / Centralect)</div>
-          <div class="cip-hint">Replace with real screenshots</div>
-        </div>
-
         <h3>E-Proktor: exam proctoring</h3>
         <p>A proctoring record system that shows <strong>one candidate per screen</strong> instead of a wall of rows, so a proctor cannot enter data against the wrong person. The candidate's photo is rendered right there in the form, not hidden behind a link, so identity checks are immediate. Required-field validation blocks submission until the record is complete. It runs in two modes from one codebase: an <strong>online</strong> mode for video-call proctoring on a laptop, and a stripped-down <strong>offline</strong> mode for in-room proctoring on a phone, complete with a QR scanner that reads a candidate's exam card and a larger photo for face-to-face verification. Drafts are saved to <code>localStorage</code> as an offline backup, and everything syncs to Sheets in real time. In the live cycle it was used to proctor and collect attendance and notes for <strong>2,644 applicants across 28 provinces</strong>.</p>
+
+        <div class="cs-img-pair">
+          <figure>
+            <img class="cs-img" style="margin:0" src="/assets/images/ypkbi-eproktor-online.png" alt="E-Proktor online mode: a single candidate's proctoring form with their ID card and photo rendered inline, plus identity, exam-room, and video/audio checks.">
+            <figcaption>Online mode: one candidate per screen, with the ID card and photo inline for immediate identity checks.</figcaption>
+          </figure>
+          <figure>
+            <img class="cs-img" style="margin:0" src="/assets/images/ypkbi-eproktor-offline.png" alt="E-Proktor offline mode on a phone: a QR scan button, a large candidate photo, arrival time, and inspection notes for in-room proctoring.">
+            <figcaption>Offline mode: a phone-friendly in-room view with a QR scanner and a larger photo for face-to-face verification.</figcaption>
+          </figure>
+        </div>
 
         <h3>CloudSpeak: spoken-English recording</h3>
         <p>A browser-based voice recorder built for the IELTS speaking simulation, aimed squarely at the problem of middle-schoolers losing their files. Recording happens entirely in the browser via the <strong>MediaRecorder API</strong>, so no connection is needed while recording. A mandatory <strong>sound check</strong> locks the real recording until the student has verified their mic works. When they finish, the file is named on a fixed convention (<code>RegCode_Name_backup_timestamp.webm</code>) and saved <strong>twice</strong>: auto-downloaded locally and, in Managed Mode, uploaded to a shared Google Drive folder with the submission logged to Sheets. If a network upload fails, the local copy still exists, and an admin <strong>Rescue Files</strong> tool can rescan the Drive folder and repair the links in bulk. In the centralized round of the SPMB it captured <strong>399 recordings</strong>, each filed neatly into a shared Drive folder alongside its auto-downloaded backup.</p>
 
+        <img class="cs-img" src="/assets/images/ypkbi-cloudspeak.png" alt="CloudSpeak recorder: a three-step progress bar, a mandatory Sound Check step, and the real recording timer locked until the check passes.">
+        <p class="cs-img-caption">The mandatory sound check gates the real recording until the student has confirmed their mic works.</p>
+
         <h3>DiscussLens: group-discussion scoring</h3>
         <p>A leaderless-group-discussion scoring portal an assessor can run from their phone while watching a live discussion. Assessors score five criteria (Academic Readiness, Inquiry &amp; Thinking, Collaboration &amp; Reflection, Grit &amp; Resilience, and The It Factor) from 1 to 6, and a <strong>micro-description</strong> appears under each score as it is picked, giving real-time guidance on what that number means. The full rubric is always a tap away in a slide-out sidebar. A sticky prev/next bar moves between candidates and auto-advances once someone is fully scored, so the assessor watches people rather than fights the interface. Total scores classify candidates automatically into tiers, drafts persist in <code>localStorage</code>, and a two-assessor lock stops a third person from scoring a group that already has two independent reads. It carried the LGD session for the same centralized round: <strong>399 finalists split across 80 groups</strong>, with the rubric-led scoring and tally handled for the assessors so they could focus on the discussion.</p>
 
+        <img class="cs-img" src="/assets/images/ypkbi-discusslens.png" alt="DiscussLens scoring portal: five criteria each scored 1 to 6, a set of score-classification bands, and a Rubric button in the header.">
+        <p class="cs-img-caption">Each criterion is scored 1 to 6, with live score classifications and the full rubric one tap away.</p>
+
         <h3>Centralect: the final selection meeting</h3>
         <p>The decision dashboard the committee sits in front of during the plenary selection meeting. It pulls every score from all six stages into one weighted, rankable view, each candidate a card with photo, score matrix, and a weighted-score hero box. Opening a candidate reveals a full profile: every score plus the qualitative notes (psychology, health, achievements). Committee members can page through candidates without closing the modal, put two profiles side by side to compare, and mark Select, Waitlist, or Reject with an <strong>optimistic UI</strong> that recolors the card instantly and syncs to Sheets in the background. A sticky header tracks the main and waitlist quotas in real time, and search is debounced so a large candidate list stays responsive. It was where the committee pooled every score from the 399 finalists and settled the final <strong>180 main selections and 10 waitlist</strong> places.</p>
+
+        <img class="cs-img" src="/assets/images/ypkbi-centralect.png" alt="Centralect candidate profile: quantitative results from all six stages weighted into a single score, with Select, Waitlist, and Reject actions. Individual score figures are blurred.">
+        <p class="cs-img-caption">A candidate's full profile in Centralect: every stage weighted into one score, with side-by-side comparison and one-tap decisions. (Score figures blurred.)</p>
 
         <div class="cs-callout insight">
           <p>The suite is a pipeline, not a bundle. E-Proktor, CloudSpeak, and DiscussLens each write their stage's results into Google Sheets; Centralect reads the aggregate back out. The spreadsheet the process used to drown in became the quiet integration layer that ties the four apps together.</p>
