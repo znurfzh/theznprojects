@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="YPKBI Digital Admission Suite — End-to-end digital transformation of a multi-school admissions process. Case study by Zulsyika Nurfaizah.">
+  <meta name="description" content="YPKBI Digital Admission Suite: four interconnected web apps that took a multi-stage school admissions selection off raw spreadsheets. Case study by Zulsyika Nurfaizah.">
   <title>YPKBI Digital Admission Suite — theznprojects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,700;1,9..144,800&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
       <span class="tag tag-ux">UX Design</span>
     </div>
     <h1 class="cs-title">YPKBI Digital Admission Suite</h1>
-    <p class="cs-subtitle">End-to-end digital transformation of a multi-school admissions process. Four interconnected web apps handling 4,000+ concurrent students across proctoring, voice recording, group discussion assessment, and final selection decisions.</p>
+    <p class="cs-subtitle">Four web apps that took a multi-stage school admissions selection off raw spreadsheets. One each for exam proctoring, spoken-English recording, group-discussion scoring, and the final selection meeting, unified by a single shared design system.</p>
   </div>
 </header>
 
@@ -42,15 +42,15 @@
     <div class="cs-tldr-grid">
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Problem</div>
-        <div class="cs-tldr-val">How do you run a high-stakes multi-school admissions process for 4,000+ concurrent students — without paper, without chaos, and without a large ops team?</div>
+        <div class="cs-tldr-val">A high-stakes admissions selection was being run directly inside Google Spreadsheets and generic tools. It broke in predictable ways: proctors editing the wrong row, students losing their recordings, assessors scoring without a rubric in reach.</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">My Role</div>
-        <div class="cs-tldr-val">Digital Transformation Specialist · YPKBI</div>
+        <div class="cs-tldr-val">Digital Transformation Specialist, YPKBI. I designed and built the four-app suite end to end.</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">The Outcome</div>
-        <div class="cs-tldr-val">Four interconnected web apps covering online proctoring, voice-recorded spoken assessment, live group discussion scoring, and a final selection decision dashboard.</div>
+        <div class="cs-tldr-val">Four production web apps (E-Proktor, CloudSpeak, DiscussLens, Centralect) on one shared design system. They ran a live cycle: 2,644 applicants proctored across 28 provinces, narrowed to 180 selections and a 10-place waitlist.</div>
       </div>
       <div class="cs-tldr-cell">
         <div class="cs-tldr-label">Timeframe</div>
@@ -66,41 +66,127 @@
       <article class="cs-narrative">
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">YPKBI Admission Suite — cover image</div>
+          <div class="cip-label">YPKBI Admission Suite: cover image (the four apps together)</div>
           <div class="cip-hint">Replace with your actual screenshot or mockup</div>
         </div>
 
         <h2 id="context">Context &amp; Problem</h2>
-        <p><strong>[Your writing goes here]</strong> — What was the admissions situation at YPKBI? What made it complex? Who were the stakeholders and what were the failure modes of the old process?</p>
+        <p>Every year, SMA Kemala Taruna Bhayangkara runs a new-student admissions selection (SPMB) that is anything but a single test. A candidate moves through a pipeline of stages: an academic aptitude test, an IELTS-style speaking simulation, a physical fitness assessment, a leaderless group discussion, a candidate interview, and a parent interview. Each stage produces its own scores, and at the end a committee has to weigh all of it and decide who gets in.</p>
+        <p>When I joined as Digital Transformation Specialist at YPKBI, most of that pipeline was being run <em>inside</em> Google Spreadsheets. Not backed by spreadsheets: run inside them. Proctors typed verdicts into shared sheets during live video calls. Students recorded speaking tests on whatever recorder they could find. Assessors scored group discussions on paper or in raw cells. The final committee made accept-or-reject calls by editing a column.</p>
+        <p>It worked, technically, and it broke in ways that were completely predictable once you watched it happen:</p>
+        <ul>
+          <li><strong>Proctoring.</strong> With every candidate visible at once in one sheet, proctors kept entering data on the wrong row. Photos and ID documents lived behind separate links, so verifying an identity meant opening another tab. There was no <em>required field</em>, so records came back half-filled. And the sheet was miserable to use on a phone, which is exactly what an in-room proctor is holding.</li>
+          <li><strong>Speaking test.</strong> The IELTS simulation was recorded with Vocaroo and phone voice-memo apps. The test-takers were mostly middle-schoolers who had no idea where their device saved the file, so recordings went missing. Filenames were inconsistent, so the ones that survived were hard to match to a candidate. There was no backup, and collecting everything was slow manual coordination.</li>
+          <li><strong>Group discussion.</strong> Assessors scored five criteria per candidate with no rubric within reach, no check that every criterion was filled, and no way to tell whether a group had already been scored by another assessor.</li>
+          <li><strong>Final selection.</strong> Scores from all six stages were scattered across columns and tabs. There was no integrated candidate profile, no photo in the main view, no way to compare two candidates side by side, and no live sense of how full the quota was getting.</li>
+        </ul>
 
-        <h2 id="process">Process &amp; Decisions</h2>
-        <p><strong>[Your writing goes here]</strong> — How did you scope the four apps? What did research or observation reveal? What were the key architectural and UX decisions?</p>
-
-        <div class="cs-img-placeholder">
-          <div class="cip-label">Process / research / wireframe image</div>
-          <div class="cip-hint">Replace with your actual work artifact</div>
+        <div class="cs-callout challenge">
+          <p>The real problem was not any one broken stage. It was that a serious, high-stakes selection process had no purpose-built tools at all, only a general-purpose spreadsheet asked to be five things it was never designed to be.</p>
         </div>
 
+        <h2 id="process">Process &amp; Decisions</h2>
+        <p>I did not try to build one big platform. A monolith would have taken longer, been riskier to run during a live admissions cycle, and forced every stage into the same shape. Instead I built one focused web app per broken stage, and made them feel like one product by putting them all on a shared design system and a shared architecture.</p>
+        <p>That single decision shaped everything else. Four small apps that look and behave alike are easier to learn, easier to trust, and easier to maintain than four tools that each solve their problem their own way.</p>
+
+        <div class="cs-section-sys">
+          <div class="cs-section-sys-label">Architecture</div>
+          <h3>A serverless backbone, not a server</h3>
+          <p>Every app in the suite runs on the same stack: a static HTML/CSS/JavaScript front end hosted on Vercel, a Google Apps Script back end, and a Google Spreadsheet as the database. No servers to provision, no infrastructure bill, and native read/write access to the sheets the admissions team already lived in. I chose Apps Script and Sheets deliberately to <strong>delete the barrier to entry</strong>: keeping the data source in a spreadsheet meant it stayed open and legible to the non-technical team, and immediately available to plug into Looker Studio for reporting without an export step or an API in between.</p>
+          <p>Authentication is deliberately lightweight: a Sheet ID plus a PIN, validated server-side in Apps Script, with no user-account system to manage. It fits an event that runs in bursts once a year rather than a product with permanent logins.</p>
+          <div class="cs-tech-stack">
+            <span class="cs-tech-tag">HTML / CSS / JS (ES6+)</span>
+            <span class="cs-tech-tag">Google Apps Script</span>
+            <span class="cs-tech-tag">Google Sheets (as DB)</span>
+            <span class="cs-tech-tag">Vercel</span>
+            <span class="cs-tech-tag">MediaRecorder API</span>
+            <span class="cs-tech-tag">Looker Studio</span>
+            <span class="cs-tech-tag">Hanken Grotesk</span>
+          </div>
+        </div>
+
+        <p>Two cross-cutting patterns do a lot of quiet work across all four apps, and they exist because the people running admissions are not engineers:</p>
+
+        <div class="cs-section-ux">
+          <div class="cs-section-ux-label">Interaction Pattern</div>
+          <h3>Configuration that lives in a spreadsheet, and links that configure themselves</h3>
+          <p>Everything an admin might need to change, the PIN, the exam name, quotas, the WhatsApp contact, lives in a hidden <strong>_Config</strong> sheet inside the same spreadsheet. No <code>.env</code> files, no code edits, no developer in the loop. An admin who can edit a cell can reconfigure the system, and the same app can be redeployed for a completely different exam without touching the source.</p>
+          <p>To hand the app to a proctor or assessor, the admin generates a link that carries the Sheet ID as a URL parameter. When the user opens it, the field fills itself in, turns green, and shows an "Auto-filled" badge with an Edit button as a fallback. One tap in WhatsApp, and they are in. That autofill-with-visual-confirmation pattern is reused identically across all four apps.</p>
+        </div>
+
+        <p>The rest of the design system is the connective tissue: one color palette defined entirely as CSS custom properties, one typeface (Hanken Grotesk), one set of card, modal, button, and admin-panel components, and a mobile-first, progressive-disclosure approach that keeps admin tooling tucked behind a toggle so a proctor never sees complexity meant for someone else.</p>
+
         <h2 id="solution">The Solution</h2>
-        <p><strong>[Your writing goes here]</strong> — Walk through the four apps: proctoring, voice recording, group discussion assessment, and selection decision. What does each one do and how do they connect?</p>
+        <p>Four apps, one per stage of the funnel, each named for what it does.</p>
 
         <div class="cs-img-placeholder">
-          <div class="cip-label">Final solution / deliverable image</div>
-          <div class="cip-hint">Replace with your actual screenshot or deliverable</div>
+          <div class="cip-label">The four apps, side by side (E-Proktor / CloudSpeak / DiscussLens / Centralect)</div>
+          <div class="cip-hint">Replace with real screenshots</div>
+        </div>
+
+        <h3>E-Proktor: exam proctoring</h3>
+        <p>A proctoring record system that shows <strong>one candidate per screen</strong> instead of a wall of rows, so a proctor cannot enter data against the wrong person. The candidate's photo is rendered right there in the form, not hidden behind a link, so identity checks are immediate. Required-field validation blocks submission until the record is complete. It runs in two modes from one codebase: an <strong>online</strong> mode for video-call proctoring on a laptop, and a stripped-down <strong>offline</strong> mode for in-room proctoring on a phone, complete with a QR scanner that reads a candidate's exam card and a larger photo for face-to-face verification. Drafts are saved to <code>localStorage</code> as an offline backup, and everything syncs to Sheets in real time. In the live cycle it was used to proctor and collect attendance and notes for <strong>2,644 applicants across 28 provinces</strong>.</p>
+
+        <h3>CloudSpeak: spoken-English recording</h3>
+        <p>A browser-based voice recorder built for the IELTS speaking simulation, aimed squarely at the problem of middle-schoolers losing their files. Recording happens entirely in the browser via the <strong>MediaRecorder API</strong>, so no connection is needed while recording. A mandatory <strong>sound check</strong> locks the real recording until the student has verified their mic works. When they finish, the file is named on a fixed convention (<code>RegCode_Name_backup_timestamp.webm</code>) and saved <strong>twice</strong>: auto-downloaded locally and, in Managed Mode, uploaded to a shared Google Drive folder with the submission logged to Sheets. If a network upload fails, the local copy still exists, and an admin <strong>Rescue Files</strong> tool can rescan the Drive folder and repair the links in bulk. In the centralized round of the SPMB it captured <strong>399 recordings</strong>, each filed neatly into a shared Drive folder alongside its auto-downloaded backup.</p>
+
+        <h3>DiscussLens: group-discussion scoring</h3>
+        <p>A leaderless-group-discussion scoring portal an assessor can run from their phone while watching a live discussion. Assessors score five criteria (Academic Readiness, Inquiry &amp; Thinking, Collaboration &amp; Reflection, Grit &amp; Resilience, and The It Factor) from 1 to 6, and a <strong>micro-description</strong> appears under each score as it is picked, giving real-time guidance on what that number means. The full rubric is always a tap away in a slide-out sidebar. A sticky prev/next bar moves between candidates and auto-advances once someone is fully scored, so the assessor watches people rather than fights the interface. Total scores classify candidates automatically into tiers, drafts persist in <code>localStorage</code>, and a two-assessor lock stops a third person from scoring a group that already has two independent reads. It carried the LGD session for the same centralized round: <strong>399 finalists split across 80 groups</strong>, with the rubric-led scoring and tally handled for the assessors so they could focus on the discussion.</p>
+
+        <h3>Centralect: the final selection meeting</h3>
+        <p>The decision dashboard the committee sits in front of during the plenary selection meeting. It pulls every score from all six stages into one weighted, rankable view, each candidate a card with photo, score matrix, and a weighted-score hero box. Opening a candidate reveals a full profile: every score plus the qualitative notes (psychology, health, achievements). Committee members can page through candidates without closing the modal, put two profiles side by side to compare, and mark Select, Waitlist, or Reject with an <strong>optimistic UI</strong> that recolors the card instantly and syncs to Sheets in the background. A sticky header tracks the main and waitlist quotas in real time, and search is debounced so a large candidate list stays responsive. It was where the committee pooled every score from the 399 finalists and settled the final <strong>180 main selections and 10 waitlist</strong> places.</p>
+
+        <div class="cs-callout insight">
+          <p>The suite is a pipeline, not a bundle. E-Proktor, CloudSpeak, and DiscussLens each write their stage's results into Google Sheets; Centralect reads the aggregate back out. The spreadsheet the process used to drown in became the quiet integration layer that ties the four apps together.</p>
         </div>
 
         <h2 id="outcomes">Outcomes &amp; Impact</h2>
-        <p><strong>[Your writing goes here]</strong> — How many students? What changed operationally? What feedback came back from administrators, proctors, or students?</p>
+        <p>All four apps were used in real operations during the SPMB 2026/2027 admissions cycle at SMA Kemala Taruna Bhayangkara. This was not a prototype or a pitch: proctors, assessors, students, and the selection committee ran the actual admissions process on it.</p>
+
+        <div class="cs-outcomes">
+          <div class="cs-outcomes-label">By the numbers</div>
+          <div class="cs-outcomes-grid">
+            <div class="cs-outcome-stat">
+              <div class="cs-outcome-val">28</div>
+              <div class="cs-outcome-label">provinces reached by E-Proktor's remote proctoring</div>
+            </div>
+            <div class="cs-outcome-stat">
+              <div class="cs-outcome-val">2,644</div>
+              <div class="cs-outcome-label">applicants proctored through the first stage</div>
+            </div>
+            <div class="cs-outcome-stat">
+              <div class="cs-outcome-val">399</div>
+              <div class="cs-outcome-label">finalists run through the centralized speaking &amp; group-discussion round</div>
+            </div>
+            <div class="cs-outcome-stat">
+              <div class="cs-outcome-val">180 + 10</div>
+              <div class="cs-outcome-label">main selections and waitlist decided in Centralect</div>
+            </div>
+          </div>
+        </div>
+
+        <p>What changed operationally: proctors stopped mis-keying rows because they only ever see one candidate; identity checks went from tab-switching to glance-and-go; speaking-test recordings stopped disappearing; assessors scored against a rubric that was always in reach; and the committee made final calls in a purpose-built dashboard instead of hunting across spreadsheet tabs.</p>
+        <p>Because every app wrote to Sheets, I could build all of the stakeholder reporting on top of the same data in Looker Studio: clean, at-a-glance dashboards rather than raw tabs. The one I am fondest of came from a constraint. The external test platform could not visualize participant numbers as they grew, so I used E-Proktor's own proctoring records as the source and built a <strong>minute-by-minute applicant-growth view</strong> that let stakeholders watch registration climb in near real time, from a data stream nobody had thought to look at that way.</p>
+
+        <div class="cs-callout insight">
+          <p>Keeping the database in a spreadsheet was not a compromise, it was the reporting strategy. Because the data never left Sheets, every operational stream was one connection away from a live dashboard, and a proctoring log I built for one purpose became a real-time growth chart for another.</p>
+        </div>
+
+        <div class="cs-callout">
+          <p>All four apps in the suite were registered for copyright with Indonesia's Directorate General of Intellectual Property (DJKI) under the Ministry of Law and Human Rights.</p>
+        </div>
 
         <h2 id="reflection">Reflection</h2>
         <div class="cs-reflection">
           <div class="cs-reflection-label">Reflection</div>
-          <p><strong>[Your writing goes here]</strong> — What would you do differently? What did you learn about designing under real operational constraints? What are you most proud of?</p>
+          <p>The thing I am most proud of is not any single app. It is that four separately-built tools feel like one system. The shared palette, type, components, and the <em>_Config</em> and autofill patterns were a deliberate constraint I held myself to, and that constraint is what made the suite learnable for people using it for a few intense days once a year.</p>
+          <p>Building for real operational stress taught me more than any brief could. The users were proctors moving around a room, assessors watching a live discussion, and middle-schoolers who did not know where their files went. Every design decision, one candidate per screen, mandatory sound check, dual-save recordings, offline drafts, had to survive weak networks, small phone screens, and zero training time. Designing for those constraints, rather than for a demo, is where the interesting work was.</p>
+          <p>The decision I would defend the hardest is putting configuration in a spreadsheet. It looks unglamorous next to a "real" admin backend, but it did the most important thing: it handed control to the non-technical people who actually run admissions. They can change a PIN, a quota, or an exam name without me. A system that outlives its builder's involvement is, to me, the point of digital transformation.</p>
         </div>
 
         <nav class="cs-nav" aria-label="Case study navigation">
           <div class="cs-nav-item">
-            <!-- First case study — no previous -->
+            <!-- First case study, no previous -->
           </div>
           <div class="cs-nav-item next">
             <span class="cs-nav-dir">Next →</span><a href="/work/cognizance"><div class="cs-nav-title">Cognizance</div></a>
@@ -114,7 +200,29 @@
           <div class="cs-sidebar-facts">
             <div class="cs-sf-row"><span class="cs-sf-label">Role</span><span class="cs-sf-val">Digital Transformation Specialist · YPKBI</span></div>
             <div class="cs-sf-row"><span class="cs-sf-label">Year</span><span class="cs-sf-val">2025–2026</span></div>
-            <div class="cs-sf-row"><span class="cs-sf-label">Scope</span><span class="cs-sf-val">4 interconnected web apps · 4,000+ concurrent students</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Context</span><span class="cs-sf-val">SPMB 2026/2027 · SMA Kemala Taruna Bhayangkara</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Scope</span><span class="cs-sf-val">4 web apps · one shared design system</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Scale</span><span class="cs-sf-val">2,644 applicants · 28 provinces · 180 + 10 selected</span></div>
+          </div>
+        </div>
+        <div class="cs-sidebar-block">
+          <h3>The four apps</h3>
+          <div class="cs-sidebar-facts">
+            <div class="cs-sf-row"><span class="cs-sf-label">E-Proktor</span><span class="cs-sf-val">Exam proctoring (online + offline)</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">CloudSpeak</span><span class="cs-sf-val">Spoken-English recording</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">DiscussLens</span><span class="cs-sf-val">Group-discussion scoring</span></div>
+            <div class="cs-sf-row"><span class="cs-sf-label">Centralect</span><span class="cs-sf-val">Final selection dashboard</span></div>
+          </div>
+        </div>
+        <div class="cs-sidebar-block">
+          <h3>Built with</h3>
+          <div class="cs-tool-tags">
+            <span class="cs-tool-tag">HTML / CSS / JS</span>
+            <span class="cs-tool-tag">Google Apps Script</span>
+            <span class="cs-tool-tag">Google Sheets</span>
+            <span class="cs-tool-tag">Vercel</span>
+            <span class="cs-tool-tag">MediaRecorder API</span>
+            <span class="cs-tool-tag">Looker Studio</span>
           </div>
         </div>
         <div class="cs-sidebar-block">
