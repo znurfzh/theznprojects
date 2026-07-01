@@ -67,10 +67,8 @@
     <div class="cs-layout">
       <article class="cs-narrative">
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">Cognizance cover image</div>
-          <div class="cip-hint">The split-screen reading view (document on the left, Socratic AI assistant on the right) or the homepage "Welcome to Cognizance" card</div>
-        </div>
+        <img class="cs-img" src="/assets/images/cognizance-glitch-wireframe.png" alt="An early Cognizance prototype built in Glitch: a split-screen layout with a Choose File button and Document Content panel on the left, and a Chat panel with an answer box and Send button on the right.">
+        <p class="cs-img-caption">An early split-screen prototype I stood up in Glitch: the document on the left, a Socratic chat on the right.</p>
 
         <h2 id="context">Context &amp; Problem</h2>
         <p>Reading assignments are the backbone of a college course, and also one of the easiest places for understanding to quietly fall apart. Academic texts are dense, discipline-specific, and abstract (Snow, 2002), and many students cope by reading passively: skimming, highlighting, never quite connecting the text to the larger course themes (Chi, 2009). The fix is well known. Scaffolding, the kind of guided, progressive support a good tutor gives, reliably improves comprehension (Wood, Bruner &amp; Ross, 1976). The catch is that it does not scale. One instructor cannot sit beside three hundred students and ask each of them the right next question.</p>
@@ -84,19 +82,19 @@
         <p><strong>Encode a lesson plan inside the system prompt.</strong> The core deliverable was the prompt itself, built and tested as a <a href="https://gemini.google.com/gem/1Xr0kH83yW4VxKa14oijRTkD_efTs1_VC?usp=sharing" target="_blank" rel="noopener">Gemini GEM</a> (still live, and the one piece of the project you can try yourself). It instructs the model to act as a "deep-learning pal" that must question in the Socratic method and stay strictly grounded in the learner's uploaded document. The part I am proudest of is structural: the model first analyzes the document, breaks it into subtopics, and writes a <em>hidden</em> YAML learning plan (kept inside markup the learner never sees), surfacing only a friendly checklist. From then on it tutors one substep at a time, and silently begins each turn by updating a <code>learning_plan_state</code> note so it remembers where it is in the plan. It picks learning activities to fit the topic (a debate or role-play for a science reading, a vocabulary game for language), checks understanding before advancing, and adapts between a Simple and a Deep explanation level. In other words, an instructional designer's lesson plan, sequencing, scaffolding, formative checks and all, written as instructions to a model so it stays a tutor instead of collapsing into a summary.</p>
         <p>That prompt became the brain of the finished product. When the team built the app, the AI ran on the system prompt I had engineered and tested.</p>
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">The Socratic AI chat in action</div>
-          <div class="cip-hint">The "Can you give me an example?" exchange showing the document-grounded answer and suggested follow-up prompts, or a snippet of the Gemini GEM prompt itself</div>
+        <img class="cs-img" src="/assets/images/cognizance-socratic-chat.png" alt="Socratic Chat App V.1: the user says 'I think the earth is flat', and the AI, instead of correcting, asks what the most compelling evidence for a flat Earth would be, then what factors to weigh when judging whether a long-held belief is accurate now.">
+        <p class="cs-img-caption">The flat-earth test in my early Socratic Chat App prototype: rather than correcting the learner, the model asks for their most compelling evidence, then what we should weigh in judging a long-held belief. That was the proof the approach could hold.</p>
+
+        <div class="cs-callout">
+          <p>Want the messy middle? <a href="https://docs.google.com/presentation/d/1WFbNK2ebd417xdE2LZAnpKFHLCr41i2StBAc3RFlx2g/edit?usp=sharing" target="_blank" rel="noopener">See the early AI interaction prototyping deck →</a></p>
         </div>
 
         <h2 id="solution">The Solution</h2>
         <p><strong>Cognizance</strong> is the working prototype the team built around that prompt, vibe-coded from a Replit build into Cursor for refinement and deployed back through Replit (a React and Express app under the hood). My teammate Rae led the final engineering; my system prompt drove its AI. What matters is the experience, and every part of it is bent toward making the learner do cognitive work.</p>
         <p>You upload a PDF or document and land in a <strong>split-screen reading view</strong>: the text on the left, an AI reading assistant on the right. The assistant opens not with a summary but with a question, and offers suggested follow-ups that keep the learner in an active stance ("How does this relate to the main themes?", "Help me think critically about this"). Every answer is <strong>grounded in the document and cited</strong>, so the learner can see where a claim came from and judge it. A <strong>Simple / Deep toggle</strong> shifts the explanation level between everyday, grade-school-friendly language and full college-level depth with proper terminology. And a separate <strong>Mindmap view</strong> auto-generates a concept map of the document, central themes radiating out into clickable nodes, so the structure of a dense reading becomes something you can see at a glance rather than reconstruct from prose.</p>
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">The Mindmap view</div>
-          <div class="cip-hint">The auto-generated concept map (central topic with branching, clickable nodes) from the document</div>
-        </div>
+        <img class="cs-img" src="/assets/images/cognizance-gem.png" alt="The SocraPal custom Gemini GEM home screen, showing the SocraPal name and recent conversations like 'Learning Plan for Uploaded Documents' and 'Document Upload for Learning'.">
+        <p class="cs-img-caption">SocraPal, the live Gemini GEM: the engineered Socratic system prompt that became the product's brain, and the one piece you can still try today.</p>
 
         <h2 id="outcomes">Outcomes &amp; Impact</h2>
         <p>Cognizance reached a working, demo-able prototype and ran live at our final presentation. I want to be straight about its status: this is a graduate capstone, not a launched product. We designed a thorough evaluation plan, pre and post comprehension tests, affect surveys, activity logging, and thematic coding, built around a shared reading on Sesame Street and race, but we did not get to run it at scale. And the prototype is now offline; it was hosted on a teammate's subscription and only kept live for the demo, so there is no public link to share.</p>

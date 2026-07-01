@@ -62,10 +62,8 @@
     <div class="cs-layout">
       <article class="cs-narrative">
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">Affectris cover image</div>
-          <div class="cip-hint">Screenshot of the game running with the live webcam expression-detection panel</div>
-        </div>
+        <img class="cs-img" src="/assets/images/affectris-home.png" alt="Affectris title screen: a pixel-art 'AFFECTRIS' logo with Start Game and How to Play options on a black background, running in the p5.js editor.">
+        <p class="cs-img-caption">Affectris: a face-controlled Tetris, built in p5.js and face-api.js.</p>
 
         <h2 id="context">Context &amp; Problem</h2>
         <p>The idea started with a single finding. Butler and colleagues (2020) reported that playing Tetris could disrupt <em>memory consolidation</em>, the process by which intrusive, traumatic memories get locked in, and was associated with increased hippocampal volume in patients with combat-related PTSD. The game wasn't entertainment in that study; it was a cognitive intervention, using a demanding visuospatial task to occupy the mind at exactly the moment a memory would otherwise settle.</p>
@@ -78,10 +76,8 @@
         <p><strong>Seven expressions, seven pieces.</strong> The mapping fell into place almost too neatly. Standard Tetris has seven tetrominoes; face-api detects seven basic expressions: neutral, happy, sad, angry, surprised, fearful, disgusted. I mapped one expression to each piece, so producing a face is how you summon and steer a block. Expression stops being telemetry the system reads in the background and becomes the control surface itself.</p>
         <p><strong>The build was a platform odyssey.</strong> The honest version of the process is a string of dead ends. I built the first version in the p5.js web editor, the video feed worked, and I simulated expressions with letter keys, but wiring in real face-api detection broke: the editor wouldn't accept the model's <code>.bin</code> and <code>.json</code> weight files past its 5&nbsp;MB limit. I moved to OpenProcessing (where we'd used face-api in class); there the <code>.json</code> files kept returning empty. I moved again, to Glitch, restructuring the code for yet another file layout. Face-api connected but still couldn't find its models, until I tracked down an alternative, actively-maintained face-api build, swapped it in, and it finally worked. (It probably would have run on the earlier platforms too, which is its own small lesson.) From there I added the emotion-detection logic, and the game was real.</p>
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">Mapping diagram, seven expressions → seven tetrominoes</div>
-          <div class="cip-hint">Show each expression paired with its piece, plus the face-api detection overlay</div>
-        </div>
+        <img class="cs-img" src="/assets/images/affectris-how-to.png" alt="Affectris How to Play screen: a controls table and an 'Expression to Tetrominoes Map' pairing Surprised, Angry, Fearful, Neutral, Disgusted, Sad, and Happy each with a distinct Tetris piece.">
+        <p class="cs-img-caption">The mapping in the game's own How to Play screen: each of the seven facial expressions summons one of the seven tetrominoes.</p>
 
         <h2 id="solution">The Solution</h2>
         <p><strong>Affectris</strong> (affect + Tetris) is a working browser game. A webcam feed runs through real-time face-api expression detection; each detected expression maps to one of the seven tetrominoes, so the player drives the game with their face instead of the keyboard. A live readout of what the model is detecting keeps the otherwise-invisible recognition legible, giving the player a tight loop to calibrate their expressions against.</p>
@@ -89,10 +85,8 @@
 
         <p><a href="https://editor.p5js.org/znurfzh/full/tn05MiwHj" class="btn-primary" target="_blank" rel="noopener">▶ Play the live build</a></p>
 
-        <div class="cs-img-placeholder">
-          <div class="cip-label">The prototype in play</div>
-          <div class="cip-hint">Webcam + board side by side, mid-game, with an expression actively driving a piece</div>
-        </div>
+        <img class="cs-img" src="/assets/images/affectris-play.png" alt="Affectris gameplay: a Tetris board with a falling red piece on the left, and a right-hand panel showing the live webcam face-detection feed with a status readout, the next piece, and score, level, and lines counters.">
+        <p class="cs-img-caption">Mid-game: the board on the left, and on the right the live face-detection readout that keeps the recognition legible, plus the next piece and score.</p>
 
         <h2 id="outcomes">Outcomes &amp; Impact</h2>
         <p>The deliverable is a fully functioning expression-detection Tetris game, built solo, end to end, in about four weeks. As a coursework prototype its value isn't usage metrics; it's that it makes an abstract argument testable. You can hand it to someone, watch them play, and have a concrete artifact to think with about what it means to put affect at the <em>center</em> of an interface rather than at its edges.</p>
