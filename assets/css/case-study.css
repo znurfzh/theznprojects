@@ -1,5 +1,5 @@
 /* ============================================================
-   theznprojects — case-study.css
+   theznprojects - case-study.css
    Extends work.css for individual case study pages.
    Covers: TL;DR block, narrative prose, flexible section
    variants (Systems / UX / LD), image gallery, reflection.
@@ -48,7 +48,7 @@
 }
 
 /* ── TL;DR block ────────────────────────────────────────────── */
-/* Sits between the header and the body — full bleed warm bg */
+/* Sits between the header and the body - full bleed warm bg */
 .cs-tldr {
   background: var(--warm);
   padding: 40px 0 56px;
@@ -193,7 +193,7 @@
 
 /* ── Flexible section variants ──────────────────────────────── */
 
-/* Systems variant — architecture / tech decisions */
+/* Systems variant - architecture / tech decisions */
 .cs-section-sys {
   background: var(--warm); border-radius: var(--radius-md);
   border: 1px solid var(--border); padding: 28px 32px;
@@ -221,7 +221,7 @@
   background: #F3F0FF; color: #5B3AC4; border-radius: 20px;
 }
 
-/* UX variant — research / process */
+/* UX variant - research / process */
 .cs-section-ux {
   background: var(--blue-lt); border-radius: var(--radius-md);
   border: 1px solid var(--blue-mid); padding: 28px 32px;
@@ -240,7 +240,7 @@
 .cs-section-ux p  { font-size: 0.9rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 12px; }
 .cs-section-ux p:last-child { margin-bottom: 0; }
 
-/* LD variant — instructional design rationale */
+/* LD variant - instructional design rationale */
 .cs-section-ld {
   background: #f0fdf4; border-radius: var(--radius-md);
   border: 1px solid #bbf7d0; padding: 28px 32px;

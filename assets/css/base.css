@@ -1,11 +1,11 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   theznprojects — base.css
+   theznprojects - base.css
    Shared across all pages: tokens, typography, layout, nav, footer, buttons,
    scroll reveal, and responsive breakpoints.
    ───────────────────────────────────────────────────────────────────────────── */
 
 /* ── Google Fonts are loaded via <link> in each HTML head ─────────────────── */
-/* Fraunces + PT Sans — see <head> in each page file                          */
+/* Fraunces + PT Sans - see <head> in each page file                          */
 
 /* ── Design tokens ─────────────────────────────────────────────────────────── */
 :root {
@@ -93,7 +93,7 @@ a     { color: inherit; text-decoration: none; }
   display: flex; align-items: center; justify-content: space-between;
 }
 
-/* Brand wordmark — the·ZN·projects */
+/* Brand wordmark - the·ZN·projects */
 .nav-logo {
   font-family: var(--body);
   font-size: 0.9rem;

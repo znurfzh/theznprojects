@@ -1,5 +1,5 @@
 /* ============================================================
-   theznprojects — base.js
+   theznprojects - base.js
    Shared across all pages: nav scroll state, scroll reveal
    ============================================================ */
 

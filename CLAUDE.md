@@ -2,7 +2,7 @@
 
 ## Who I am
 Zulsyika Nurfaizah (ZN), learning designer and systems builder based in
-Jakarta, Indonesia. M.A. LTED from NYU, B.Ed. EdTech from UNJ. Currently
+Jakarta, Indonesia. M.A. LTXD from NYU, B.Ed. EdTech from UNJ. Currently
 Digital Transformation Specialist at YPKBI.
 
 ---

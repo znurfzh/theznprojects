@@ -378,7 +378,7 @@ async function main() {
   console.log(`Found ${posts.length} published post(s)`);
 
   for (const post of posts) {
-    if (!post.slug) { console.warn(`Skipping "${post.title}" — no slug`); continue; }
+    if (!post.slug) { console.warn(`Skipping "${post.title}" - no slug`); continue; }
 
     // Fetch blocks
     const blocksRes = await notion.blocks.children.list({ block_id: post.id, page_size: 100 });
