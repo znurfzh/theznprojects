@@ -22,6 +22,8 @@ URL: theznprojects.com (or theznprojects.vercel.app)
 - **Publish flow:** Notion automation → Vercel Deploy Hook → Vercel runs `npm run build`
   - GitHub Actions workflow exists (`fetch-notion-posts.yml`) but schedule is removed;
     only `workflow_dispatch` remains. Primary publish path is the Deploy Hook.
+- **Likes:** Google Apps Script Web App + a Google Sheet, called over JSONP
+  (`apps-script/likes.gs` + `assets/likes.js`). Serverless, no CORS, no third party.
 
 ---
 
@@ -76,23 +78,28 @@ URL: theznprojects.com (or theznprojects.vercel.app)
 ├── index.html                          → homepage
 ├── about/index.html                    → about page
 ├── work/index.html                     → work index (filterable)
-├── work/ypkbi-admission-suite/index.html  → case study (FULLY WRITTEN)
-├── work/nsei-dashboard/index.html         → case study (stub)
-├── work/ethic/index.html                  → case study (stub)
-├── work/nexus-insight/index.html          → case study (stub)
-├── work/affectris/index.html              → case study (stub)
-├── work/cognizance/index.html             → case study (stub)
+├── work/ypkbi-admission-suite/index.html  → case study (written + screenshots)
+├── work/nsei-dashboard/index.html         → case study (stub; removed from work index)
+├── work/ethic/index.html                  → case study (written + screenshots)
+├── work/nexus-insight/index.html          → case study (written + screenshots)
+├── work/affectris/index.html              → case study (written + screenshots)
+├── work/cognizance/index.html             → case study (written + screenshots)
 ├── megazn/index.html                   → blog index (auto-generated between POSTS_START/END markers)
 ├── megazn/on-affective-computing/index.html   → post (placeholder, manual)
 ├── megazn/on-learn-unlearn-relearn/index.html → post (scaffolded, manual)
 ├── scripts/
 │   └── fetch-posts.js                  → Notion → static HTML generator (run by Vercel build)
+├── apps-script/
+│   └── likes.gs                        → Apps Script Web App backing megaZN likes (runs on Google, not Vercel)
+├── .vercelignore                       → keeps apps-script/ out of the static deploy
 ├── .github/workflows/
 │   └── fetch-notion-posts.yml          → manual dispatch only (no schedule)
 └── assets/
     ├── base.js                         → nav scroll + scroll reveal (shared)
+    ├── likes.js                        → megaZN per-post likes (JSONP → Apps Script)
     ├── images/
     │   ├── zulsyika.jpeg               → headshot photo (used in hero + about)
+    │   ├── <project>-*.png             → case study screenshots (ypkbi-/ethic-/nexus-/affectris-/cognizance-)
     │   ├── logo-blue.png               → Design B logo, white on blue bg
     │   ├── logo-dark.png               → Design B logo, white on dark bg
     │   ├── favicon.svg                 → site favicon (all 13 pages)
@@ -145,6 +152,7 @@ never fires on first paint).
       <span class="brand-projects">projects</span>
     </a>
     <ul class="nav-links">
+      <li><a href="/">Home</a></li>
       <li><a href="/work">Work</a></li>
       <li><a href="/megazn">megaZN</a></li>
       <li><a href="/about">About</a></li>
@@ -196,8 +204,10 @@ Section variants: `.cs-section-sys` (purple), `.cs-section-ux` (blue),
 `.cs-section-ld` (green)
 
 ### megaZN post pages
-Every post (manual or Notion-generated) includes:
-- Share bar (`.post-share`) above the author card: X/Twitter, LinkedIn, WhatsApp,
+Every post (manual or Notion-generated) includes, in DOM order:
+- Like button (`.post-like` with `data-slug`) between the content and the share bar:
+  heart + count via `assets/likes.js` → Apps Script over JSONP; `localStorage` = one like/browser
+- Share bar (`.post-share`): X/Twitter, LinkedIn, WhatsApp,
   Copy link (shows "Copied!" for 2s), native Web Share API button (mobile only)
 - Author card (`.post-author`)
 - Post navigation (`.post-nav`)
@@ -210,6 +220,7 @@ Every post (manual or Notion-generated) includes:
 - Writes `.notion-generated` marker in each post dir; cleanup loop removes stale dirs
 - Generates `megazn/index.html` between `<!-- POSTS_START -->` and `<!-- POSTS_END -->`
 - Shows `.posts-empty` state when 0 published posts
+- Each generated post carries the like button (`data-slug="${post.slug}"`) + `assets/likes.js`
 
 ---
 
@@ -218,12 +229,12 @@ Every post (manual or Notion-generated) includes:
 ### Case studies
 | Project | Status | Notes |
 |---|---|---|
-| YPKBI Admission Suite | ✅ Fully written | Flagship — narrative + all sections |
-| NSEI Dashboard | 🚫 Removed from index | Project not a done deal (Danantara); stub page still exists at /work/nsei-dashboard but not linked |
-| ETHIC | ⬜ Stub | Awaiting your content |
-| Nexus Insight | ⬜ Stub | Awaiting your content |
-| Affectris | ⬜ Stub | Awaiting your content |
-| Cognizance | ⬜ Stub | Awaiting your content |
+| YPKBI Admission Suite | ✅ Written + screenshots | Flagship — four-app suite; Centralect scores blurred |
+| NSEI Dashboard | 🚫 Removed from index | Project not a done deal (Danantara); stub page still exists at /work/nsei-dashboard but not linked (still has placeholders, intentional) |
+| ETHIC | ✅ Written + screenshots | EdTech community hub; landing + logic model + 5 menus + Thesis Expo video callout |
+| Nexus Insight | ✅ Written + screenshots | Google-Site-as-LMS faculty PD; hub + template chrome + Mayer's |
+| Affectris | ✅ Written + screenshots | Face-controlled Tetris (p5.js + face-api); title + mapping + gameplay |
+| Cognizance | ✅ Written + screenshots | Socratic AI reading tool (prompt-eng role); Glitch prototype + flat-earth chat + SocraPal GEM |
 
 ### Blog posts (megaZN)
 | Post | Status | Notes |
@@ -247,18 +258,22 @@ education, experience, site history (incl. logo display), acknowledgements
 
 ---
 
+## Done (recent)
+- **All 5 case studies** written and illustrated with real screenshots
+  (YPKBI, ETHIC, Nexus Insight, Affectris, Cognizance). NSEI stub still has placeholders (intentional).
+- **megaZN likes** live: Google Sheets + Apps Script Web App, JSONP client
+  (`apps-script/likes.gs`, `assets/likes.js`); auto-applied to future Notion posts.
+- **Home** link added to nav on every page; **em dashes** removed from site content site-wide.
+
 ## Still to build
-- **Case study content** — write the 4 stub case studies (ETHIC, Nexus Insight,
-  Affectris, Cognizance) and replace `cs-img-placeholder` divs with real screenshots
 - **Resume** — add to `/assets/resume.pdf`; linked from about page (link exists, file missing)
-- **megaZN post writing** — write the two scaffolded manual posts
-- **Likes** — planned: Google Sheets + Apps Script as backend. One Sheet tab for
-  like counts (keyed by post slug), Apps Script `doGet`/`doPost` web endpoint,
-  small JS snippet per post to fetch and increment count.
-- **Comments** — planned: same Google Sheets + Apps Script backend. Separate tab
-  for comments (slug, name, text, timestamp). Needs spam/validation consideration.
-  Discussed Disqus (general audience, has ads) vs Giscus (GitHub users only, clean).
-  Decision deferred until readership is clearer.
+- **megaZN post writing** — the two scaffolded manual posts are placeholders; ZN will
+  publish real posts via Notion going forward (the generator bakes in the like button)
+- **Comments** — deferred, not cancelled. If built: a **flat guestbook** (name + text,
+  no reply threads, no upvotes) on the same Sheets + Apps Script backend; optional
+  hold-for-approval. ZN paused it over concern about readers debating in the thread.
+  (The earlier Disqus-vs-Giscus question was also parked in favor of this custom build.)
+  Revisit once readership is clearer.
 
 ---
 
@@ -280,3 +295,12 @@ education, experience, site history (incl. logo display), acknowledgements
     solid border, no shadow. Chosen over bleeding the photo to the frame edges.
 11. **Notion publish via Deploy Hook** — Notion automation triggers Vercel Deploy Hook
     directly. GitHub Actions schedule removed (was redundant and caused failure emails).
+12. **Likes: custom Google Sheets + Apps Script** — not Disqus/Giscus. Serverless like
+    counts via an Apps Script Web App + Sheet, called over JSONP (Apps Script sends no
+    CORS headers, so JSONP for both read and increment). Source in `apps-script/likes.gs`
+    (excluded from the deploy via `.vercelignore`); client in `assets/likes.js`.
+    Comments deferred (flat guestbook if ever built).
+13. **Home link in nav** — a "Home" item sits before "Work" on every page; logo-as-home
+    wasn't instinctive enough for visitors.
+14. **No em dashes in site content** — use commas, colons, or parentheses instead. Only
+    `<title>` tags keep them. (This CLAUDE.md is internal notes, not published site content.)
