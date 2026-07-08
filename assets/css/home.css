@@ -119,6 +119,8 @@
 .project-card.feat { grid-column: span 7; }
 .project-card.std  { grid-column: span 5; }
 .project-card.half { grid-column: span 6; }
+.card-inner { display: flex; flex-direction: column; flex: 1; min-height: 0; text-decoration: none; color: inherit; }
+.card-inner:hover .card-link { gap: 9px; }
 
 .card-thumb {
   aspect-ratio: 16/9; background: var(--blue-lt);
