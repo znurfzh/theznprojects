@@ -85,8 +85,7 @@ URL: theznprojects.com (or theznprojects.vercel.app)
 ├── work/affectris/index.html              → case study (written + screenshots)
 ├── work/cognizance/index.html             → case study (written + screenshots)
 ├── megazn/index.html                   → blog index (auto-generated between POSTS_START/END markers)
-├── megazn/on-affective-computing/index.html   → post (placeholder, manual)
-├── megazn/on-learn-unlearn-relearn/index.html → post (scaffolded, manual)
+├── megazn/<slug>/index.html            → individual posts (Notion-generated at build; light theme)
 ├── scripts/
 │   └── fetch-posts.js                  → Notion → static HTML generator (run by Vercel build)
 ├── apps-script/
@@ -162,7 +161,7 @@ never fires on first paint).
 </nav>
 ```
 Add `class="active"` to the current page's nav link.
-megaZN pages use a dark nav variant (inline style overrides).
+megaZN pages use the same light nav as everywhere else (was a dark variant; switched 2026-07).
 
 ### Footer (all pages)
 ```html
@@ -178,7 +177,7 @@ megaZN pages use a dark nav variant (inline style overrides).
   </div>
 </footer>
 ```
-megaZN dark pages add inline: `style="background:var(--ink); border-top: 1px solid rgba(255,255,255,0.1);"`
+(megaZN pages now use the standard light footer, no inline override.)
 
 ### Hero photo (homepage)
 Photo sits inside `.photo-placeholder` div (white mat frame, 16px padding, no shadow).
@@ -237,10 +236,8 @@ Every post (manual or Notion-generated) includes, in DOM order:
 | Cognizance | ✅ Written + screenshots | Socratic AI reading tool (prompt-eng role); Glitch prototype + flat-earth chat + SocraPal GEM |
 
 ### Blog posts (megaZN)
-| Post | Status | Notes |
-|---|---|---|
-| on-affective-computing | ⬜ Placeholder | Structure set, awaiting writing |
-| on-learn-unlearn-relearn | ⬜ Scaffolded | Full section briefs, awaiting writing |
+All posts are authored in Notion and generated at build time (`scripts/fetch-posts.js`).
+The manual placeholder posts were deleted (2026-07); first real post published via Notion.
 
 ### About page
 ✅ Complete — bio, photo, interests, skills (grouped by category), languages,
@@ -267,8 +264,8 @@ education, experience, site history (incl. logo display), acknowledgements
 
 ## Still to build
 - **Resume** — add to `/assets/resume.pdf`; linked from about page (link exists, file missing)
-- **megaZN post writing** — the two scaffolded manual posts are placeholders; ZN will
-  publish real posts via Notion going forward (the generator bakes in the like button)
+- **megaZN posts** — authored and published via Notion; the generator bakes in the like
+  button, light theme, cover thumbnail, Notion column layouts, and build-time image downloads
 - **Comments** — deferred, not cancelled. If built: a **flat guestbook** (name + text,
   no reply threads, no upvotes) on the same Sheets + Apps Script backend; optional
   hold-for-approval. ZN paused it over concern about readers debating in the thread.
@@ -282,7 +279,8 @@ education, experience, site history (incl. logo display), acknowledgements
 2. **Fraunces + PT Sans** — not Hanken Grotesk (that's YPKBI brand)
 3. **#0063A7 Cyan Blue** — chosen because it's the color associated with
    Zulsyika's birthdate
-4. **megaZN dark pages** — nav, topic bar, posts, footer all on `var(--ink)`
+4. **megaZN light theme** — was dark (`var(--ink)`); switched to light 2026-07 for
+   readability + consistency with the rest of the site. Manual placeholder posts deleted; Notion-only.
 5. **TL;DR block is not a summary** — it's a hook for the narrative below
 6. **brand-zn is uppercase ZN** — not lowercase "zn"
 7. **Logo: Design B** — large ZN mark, preferred over Design A (text-only wordmark).
