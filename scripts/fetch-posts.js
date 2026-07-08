@@ -11,7 +11,23 @@ const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 // ── Convert Notion blocks to HTML ─────────────────────────────────────────────
 async function blocksToHtml(blocks, ctx) {
   let html = '';
+  let listOpen = null; // 'ul' | 'ol' | null — so consecutive items share one list
+  const closeList = () => { if (listOpen) { html += `</${listOpen}>\n`; listOpen = null; } };
+
   for (const block of blocks) {
+    // Group consecutive list items into a single <ul>/<ol> (else each restarts at 1)
+    if (block.type === 'bulleted_list_item') {
+      if (listOpen !== 'ul') { closeList(); html += '<ul>\n'; listOpen = 'ul'; }
+      html += `<li>${richTextToHtml(block.bulleted_list_item.rich_text)}</li>\n`;
+      continue;
+    }
+    if (block.type === 'numbered_list_item') {
+      if (listOpen !== 'ol') { closeList(); html += '<ol>\n'; listOpen = 'ol'; }
+      html += `<li>${richTextToHtml(block.numbered_list_item.rich_text)}</li>\n`;
+      continue;
+    }
+    closeList();
+
     switch (block.type) {
       case 'paragraph':
         html += `<p>${richTextToHtml(block.paragraph.rich_text)}</p>\n`;
@@ -24,12 +40,6 @@ async function blocksToHtml(blocks, ctx) {
         break;
       case 'heading_3':
         html += `<h3 id="${slugify(plainText(block.heading_3.rich_text))}">${richTextToHtml(block.heading_3.rich_text)}</h3>\n`;
-        break;
-      case 'bulleted_list_item':
-        html += `<ul><li>${richTextToHtml(block.bulleted_list_item.rich_text)}</li></ul>\n`;
-        break;
-      case 'numbered_list_item':
-        html += `<ol><li>${richTextToHtml(block.numbered_list_item.rich_text)}</li></ol>\n`;
         break;
       case 'quote':
         html += `<blockquote><p>${richTextToHtml(block.quote.rich_text)}</p></blockquote>\n`;
@@ -67,6 +77,7 @@ async function blocksToHtml(blocks, ctx) {
         break;
     }
   }
+  closeList();
   return html;
 }
 
