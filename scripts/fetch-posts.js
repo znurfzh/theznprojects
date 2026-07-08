@@ -9,7 +9,7 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 
 // ── Convert Notion blocks to HTML ─────────────────────────────────────────────
-function blocksToHtml(blocks) {
+async function blocksToHtml(blocks, ctx) {
   let html = '';
   for (const block of blocks) {
     switch (block.type) {
@@ -40,15 +40,29 @@ function blocksToHtml(blocks) {
       case 'divider':
         html += `<hr>\n`;
         break;
-      case 'image':
+      case 'image': {
         const imgUrl = block.image.type === 'external'
           ? block.image.external.url
           : block.image.file.url;
         const caption = block.image.caption?.length
           ? `<p class="post-img-caption">${richTextToHtml(block.image.caption)}</p>`
           : '';
-        html += `<img src="${imgUrl}" class="post-img" alt="">\n${caption}`;
+        const alt  = plainText(block.image.caption || []).replace(/"/g, '&quot;');
+        const file = ctx ? await downloadImage(imgUrl, ctx.dir, `img-${++ctx.img}`) : null;
+        const src  = file ? `/megazn/${ctx.slug}/${file}` : imgUrl;
+        html += `<img src="${src}" class="post-img" alt="${alt}">\n${caption}`;
         break;
+      }
+      case 'column_list': {
+        const cols = await notion.blocks.children.list({ block_id: block.id, page_size: 100 });
+        let colsHtml = '';
+        for (const col of cols.results) {
+          const kids = await notion.blocks.children.list({ block_id: col.id, page_size: 100 });
+          colsHtml += `<div class="post-column">${await blocksToHtml(kids.results, ctx)}</div>`;
+        }
+        html += `<div class="post-columns">${colsHtml}</div>\n`;
+        break;
+      }
       default:
         break;
     }
@@ -77,6 +91,33 @@ function plainText(richTexts) {
 
 function slugify(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+// Download a Notion image to the post dir so it doesn't rot when the signed
+// URL expires (~1h for uploaded files). Returns the saved filename or null.
+async function downloadImage(url, destDir, baseName) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const ct = (res.headers.get('content-type') || '').toLowerCase();
+    let ext = 'png';
+    if (ct.includes('jpeg') || ct.includes('jpg')) ext = 'jpg';
+    else if (ct.includes('png'))  ext = 'png';
+    else if (ct.includes('gif'))  ext = 'gif';
+    else if (ct.includes('webp')) ext = 'webp';
+    else if (ct.includes('svg'))  ext = 'svg';
+    else {
+      const m = new URL(url).pathname.match(/\.(png|jpe?g|gif|webp|svg)$/i);
+      if (m) ext = m[1].toLowerCase().replace('jpeg', 'jpg');
+    }
+    const buf  = Buffer.from(await res.arrayBuffer());
+    const file = `${baseName}.${ext}`;
+    fs.writeFileSync(path.join(destDir, file), buf);
+    return file;
+  } catch (e) {
+    console.warn(`  image download failed (${url.slice(0, 60)}...): ${e.message}`);
+    return null;
+  }
 }
 
 // ── Generate TOC from headings ────────────────────────────────────────────────
@@ -135,15 +176,14 @@ function generatePostHtml(post, content, toc, allPosts) {
 </head>
 <body>
 
-<nav id="nav" style="background:rgba(28,28,28,0.95); border-bottom-color: rgba(255,255,255,0.08);">
+<nav id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <span class="brand-the" style="color:rgba(255,255,255,0.35);">the</span><span class="brand-zn">ZN</span><span class="brand-projects" style="color:rgba(255,255,255,0.35);">projects</span>
-    </a>
+    <a href="/" class="nav-logo"><span class="brand-the">the</span><span class="brand-zn">ZN</span><span class="brand-projects">projects</span></a>
     <ul class="nav-links">
-      <li><a href="/work" style="color:rgba(255,255,255,0.4);">Work</a></li>
-      <li><a href="/megazn" style="color:rgba(255,255,255,0.4);">megaZN</a></li>
-      <li><a href="/about" style="color:rgba(255,255,255,0.4);">About</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/work">Work</a></li>
+      <li><a href="/megazn" class="active">megaZN</a></li>
+      <li><a href="/about">About</a></li>
       <li class="nav-cta"><a href="/#contact">Say hi</a></li>
     </ul>
   </div>
@@ -213,10 +253,10 @@ function generatePostHtml(post, content, toc, allPosts) {
   </div>
 </section>
 
-<footer style="background:var(--ink); border-top: 1px solid rgba(255,255,255,0.1);">
+<footer>
   <div class="footer-inner">
     <span class="footer-logo">
-      <span class="brand-the" style="color:rgba(255,255,255,0.3);">the</span><span class="brand-zn">ZN</span><span class="brand-projects" style="color:rgba(255,255,255,0.3);">projects</span>
+      <span class="brand-the">the</span><span class="brand-zn">ZN</span><span class="brand-projects">projects</span>
     </span>
     <ul class="footer-links">
       <li><a href="/work">Work</a></li>
@@ -231,13 +271,6 @@ function generatePostHtml(post, content, toc, allPosts) {
 <script src="/assets/base.js"></script>
 <script src="/assets/likes.js"></script>
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 40
-      ? 'rgba(255,255,255,0.12)'
-      : 'rgba(255,255,255,0.08)';
-  }, { passive: true });
-
   const headings = document.querySelectorAll('.post-content h2[id], .post-content h3[id]');
   const tocLinks = document.querySelectorAll('.ps-toc a');
   if (headings.length) {
@@ -306,7 +339,7 @@ function generateIndexHtml(posts) {
   const rest     = posts.slice(1);
 
   const featuredHtml = featured ? `
-    <a href="/megazn/${featured.slug}" class="post-featured reveal" data-topic="${featured.tags[0] ? tagToTopic(featured.tags[0]) : ''}">
+    <a href="/megazn/${featured.slug}" class="post-featured reveal" data-topics="${(featured.tags || []).map(tagToTopic).join(' ')}">
       <div class="pf-content">
         <div class="pf-meta">
           <span class="pf-date">${featured.date}</span>
@@ -317,12 +350,14 @@ function generateIndexHtml(posts) {
         <span class="pf-link">Read post</span>
       </div>
       <div class="pf-thumb">
-        <div class="pf-thumb-placeholder">${featured.title}</div>
+        ${featured.cover
+          ? `<img src="${featured.cover}" alt="${featured.title.replace(/"/g, '&quot;')}">`
+          : `<div class="pf-thumb-placeholder">${featured.title}</div>`}
       </div>
     </a>` : '';
 
   const gridHtml = rest.map((post, i) => `
-    <a href="/megazn/${post.slug}" class="post-card reveal${i > 0 ? ` reveal-delay-${Math.min(i, 3)}` : ''}" data-topic="${post.tags[0] ? tagToTopic(post.tags[0]) : ''}">
+    <a href="/megazn/${post.slug}" class="post-card reveal${i > 0 ? ` reveal-delay-${Math.min(i, 3)}` : ''}" data-topics="${(post.tags || []).map(tagToTopic).join(' ')}">
       <div class="pc-meta">
         <span class="pc-date">${post.date}</span>
         <span class="pc-topic">${post.tags[0] || ''}</span>
@@ -381,6 +416,8 @@ async function main() {
                 : '',
     readTime: page.properties['Read Time'].rich_text[0]?.plain_text || '',
     tags:     page.properties.Tags.multi_select.map(t => t.name),
+    coverUrl: page.cover ? (page.cover.type === 'external' ? page.cover.external.url : page.cover.file.url) : '',
+    cover:    '',
   }));
 
   console.log(`Found ${posts.length} published post(s)`);
@@ -388,14 +425,21 @@ async function main() {
   for (const post of posts) {
     if (!post.slug) { console.warn(`Skipping "${post.title}" - no slug`); continue; }
 
-    // Fetch blocks
-    const blocksRes = await notion.blocks.children.list({ block_id: post.id, page_size: 100 });
-    const content   = blocksToHtml(blocksRes.results);
-    const toc       = generateToc(blocksRes.results);
-
-    // Write post file
     const dir = path.join('megazn', post.slug);
     fs.mkdirSync(dir, { recursive: true });
+
+    // Cover image (Notion page cover) → download so the signed URL can't expire
+    if (post.coverUrl) {
+      const f = await downloadImage(post.coverUrl, dir, 'cover');
+      post.cover = f ? `/megazn/${post.slug}/${f}` : post.coverUrl;
+    }
+
+    // Fetch + convert blocks (downloads inline images, expands column layouts)
+    const blocksRes = await notion.blocks.children.list({ block_id: post.id, page_size: 100 });
+    const ctx       = { slug: post.slug, dir, img: 0 };
+    const content   = await blocksToHtml(blocksRes.results, ctx);
+    const toc       = generateToc(blocksRes.results);
+
     fs.writeFileSync(path.join(dir, 'index.html'), generatePostHtml(post, content, toc, posts));
     fs.writeFileSync(path.join(dir, '.notion-generated'), '');
     console.log(`✓ Generated /megazn/${post.slug}/`);

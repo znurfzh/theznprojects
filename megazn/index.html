@@ -13,17 +13,14 @@
 </head>
 <body>
 
-<!-- NAV (dark variant) -->
-<nav id="nav" style="background:rgba(28,28,28,0.95); border-bottom-color: rgba(255,255,255,0.08);">
+<nav id="nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <span class="brand-the" style="color:rgba(255,255,255,0.35);">the</span><span class="brand-zn">ZN</span><span class="brand-projects" style="color:rgba(255,255,255,0.35);">projects</span>
-    </a>
+    <a href="/" class="nav-logo"><span class="brand-the">the</span><span class="brand-zn">ZN</span><span class="brand-projects">projects</span></a>
     <ul class="nav-links">
-      <li><a href="/" style="color:rgba(255,255,255,0.4);">Home</a></li>
-      <li><a href="/work" style="color:rgba(255,255,255,0.4);">Work</a></li>
-      <li><a href="/megazn" class="active" style="color:var(--white);">megaZN</a></li>
-      <li><a href="/about" style="color:rgba(255,255,255,0.4);">About</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/work">Work</a></li>
+      <li><a href="/megazn" class="active">megaZN</a></li>
+      <li><a href="/about">About</a></li>
       <li class="nav-cta"><a href="/#contact">Say hi</a></li>
     </ul>
   </div>
@@ -62,11 +59,10 @@
   <!-- POSTS_END -->
 </main>
 
-<!-- FOOTER (dark) -->
-<footer style="background:var(--ink); border-top: 1px solid rgba(255,255,255,0.1);">
+<footer>
   <div class="footer-inner">
     <span class="footer-logo">
-      <span class="brand-the" style="color:rgba(255,255,255,0.3);">the</span><span class="brand-zn">ZN</span><span class="brand-projects" style="color:rgba(255,255,255,0.3);">projects</span>
+      <span class="brand-the">the</span><span class="brand-zn">ZN</span><span class="brand-projects">projects</span>
     </span>
     <ul class="footer-links">
       <li><a href="/work">Work</a></li>
@@ -80,15 +76,6 @@
 
 <script src="/assets/base.js"></script>
 <script>
-  // Keep nav dark on scroll for this dark-bg page
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    // Override base.js scrolled behavior for dark nav
-    nav.style.borderBottomColor = window.scrollY > 40
-      ? 'rgba(255,255,255,0.12)'
-      : 'rgba(255,255,255,0.08)';
-  }, { passive: true });
-
   function filterPosts(topic, btn) {
     document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -97,24 +84,24 @@
     const cards    = document.querySelectorAll('.post-card:not(.coming-soon)');
     let visible    = 0;
 
+    const matches = (el) => topic === 'all'
+      || (el.dataset.topics || '').split(' ').filter(Boolean).includes(topic);
+
     // Handle featured post
     if (featured) {
-      const show = topic === 'all' || featured.dataset.topic === topic;
+      const show = matches(featured);
       featured.style.display = show ? '' : 'none';
       if (show) visible++;
     }
 
     // Handle grid cards
     cards.forEach(card => {
-      const show = topic === 'all' || card.dataset.topic === topic;
+      const show = matches(card);
       card.style.display = show ? '' : 'none';
       if (show) visible++;
     });
 
-    const label = visible === 0 ? 'No posts yet'
-      : visible === 1 ? '1 post coming soon'
-      : `${visible} posts coming soon`;
-    document.getElementById('topicCount').textContent = label;
+    document.getElementById('topicCount').textContent = visible + ' post' + (visible === 1 ? '' : 's');
   }
 </script>
 </body>
