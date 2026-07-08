@@ -103,6 +103,14 @@
 
     document.getElementById('topicCount').textContent = visible + ' post' + (visible === 1 ? '' : 's');
   }
+
+  // Apply ?topic= from the URL (e.g. a tag clicked on a post) on load
+  (function () {
+    const t = new URLSearchParams(location.search).get('topic');
+    if (!t) return;
+    const btn = document.querySelector('.topic-btn[data-topic="' + t + '"]');
+    if (btn) filterPosts(t, btn);
+  })();
 </script>
 </body>
 </html>

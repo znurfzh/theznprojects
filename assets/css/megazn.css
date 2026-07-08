@@ -493,7 +493,10 @@
   font-size: 0.72rem; font-weight: 700;
   background: var(--white); border: 1px solid var(--border);
   color: var(--muted); padding: 4px 10px; border-radius: 20px;
+  text-decoration: none; cursor: pointer;
+  transition: color var(--t), border-color var(--t), background var(--t);
 }
+.ps-tag:hover { color: var(--blue); border-color: var(--blue-mid); background: var(--blue-lt); }
 
 /* ── Responsive ──────────────────────────────────────────────*/
 @media (max-width: 900px) {

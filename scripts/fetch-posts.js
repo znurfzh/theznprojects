@@ -155,12 +155,8 @@ function generatePostHtml(post, content, toc, allPosts) {
     : `<div class="pn-item next"></div>`;
 
   const tagsHtml = post.tags.map(t =>
-    `<span class="ps-tag">${t}</span>`
+    `<a class="ps-tag" href="/megazn?topic=${tagToTopic(t)}">${t}</a>`
   ).join('');
-
-  const topicClass = post.tags[0]
-    ? `topic-${post.tags[0].toLowerCase().replace(/\s+/g, '-')}`
-    : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -194,7 +190,6 @@ function generatePostHtml(post, content, toc, allPosts) {
     <div class="post-header-inner">
       <a href="/megazn" class="post-back">Back to megaZN</a>
       <div class="post-header-meta">
-        <span class="post-topic ${topicClass}">${post.tags[0] || ''}</span>
         <span class="post-date-pub">${post.date}</span>
         <span class="post-read-time">· ${post.readTime}</span>
       </div>
@@ -343,7 +338,6 @@ function generateIndexHtml(posts) {
       <div class="pf-content">
         <div class="pf-meta">
           <span class="pf-date">${featured.date}</span>
-          <span class="pf-topic">${featured.tags[0] || ''}</span>
         </div>
         <h2 class="pf-title">${featured.title}</h2>
         <p class="pf-excerpt">${featured.excerpt}</p>
@@ -360,7 +354,6 @@ function generateIndexHtml(posts) {
     <a href="/megazn/${post.slug}" class="post-card reveal${i > 0 ? ` reveal-delay-${Math.min(i, 3)}` : ''}" data-topics="${(post.tags || []).map(tagToTopic).join(' ')}">
       <div class="pc-meta">
         <span class="pc-date">${post.date}</span>
-        <span class="pc-topic">${post.tags[0] || ''}</span>
       </div>
       <h3 class="pc-title">${post.title}</h3>
       <p class="pc-excerpt">${post.excerpt}</p>
