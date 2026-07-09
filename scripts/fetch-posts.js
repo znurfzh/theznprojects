@@ -11,7 +11,7 @@ const DATABASE_ID = process.env.NOTION_DATABASE_ID;
 // ── Convert Notion blocks to HTML ─────────────────────────────────────────────
 async function blocksToHtml(blocks, ctx) {
   let html = '';
-  let listOpen = null; // 'ul' | 'ol' | null — so consecutive items share one list
+  let listOpen = null; // 'ul' | 'ol' | null, so consecutive items share one list
   const closeList = () => { if (listOpen) { html += `</${listOpen}>\n`; listOpen = null; } };
 
   for (const block of blocks) {

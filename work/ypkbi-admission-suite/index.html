@@ -109,7 +109,7 @@
         <div class="cs-section-ux">
           <div class="cs-section-ux-label">Interaction Pattern</div>
           <h3>Configuration that lives in a spreadsheet, and links that configure themselves</h3>
-          <p>Everything an admin might need to change, the PIN, the exam name, quotas, the WhatsApp contact, lives in a hidden <strong>_Config</strong> sheet inside the same spreadsheet. No <code>.env</code> files, no code edits, no developer in the loop. An admin who can edit a cell can reconfigure the system, and the same app can be redeployed for a completely different exam without touching the source.</p>
+          <p>Everything an admin might need to change (the PIN, the exam name, quotas, the WhatsApp contact) lives in a hidden <strong>_Config</strong> sheet inside the same spreadsheet. No <code>.env</code> files, no code edits, no developer in the loop. An admin who can edit a cell can reconfigure the system, and the same app can be redeployed for a completely different exam without touching the source.</p>
           <p>To hand the app to a proctor or assessor, the admin generates a link that carries the Sheet ID as a URL parameter. When the user opens it, the field fills itself in, turns green, and shows an "Auto-filled" badge with an Edit button as a fallback. One tap in WhatsApp, and they are in. That autofill-with-visual-confirmation pattern is reused identically across all four apps.</p>
         </div>
 
@@ -183,7 +183,7 @@
         <p>Because every app wrote to Sheets, I could build all of the stakeholder reporting on top of the same data in Looker Studio: clean, at-a-glance dashboards rather than raw tabs. The one I am fondest of came from a constraint. The external test platform could not visualize participant numbers as they grew, so I used E-Proktor's own proctoring records as the source and built a <strong>minute-by-minute applicant-growth view</strong> that let stakeholders watch registration climb in near real time, from a data stream nobody had thought to look at that way.</p>
 
         <div class="cs-callout insight">
-          <p>Keeping the database in a spreadsheet was not a compromise, it was the reporting strategy. Because the data never left Sheets, every operational stream was one connection away from a live dashboard, and a proctoring log I built for one purpose became a real-time growth chart for another.</p>
+          <p>Keeping the database in a spreadsheet was not a compromise: it was the reporting strategy. Because the data never left Sheets, every operational stream was one connection away from a live dashboard, and a proctoring log I built for one purpose became a real-time growth chart for another.</p>
         </div>
 
         <div class="cs-callout">
@@ -194,7 +194,7 @@
         <div class="cs-reflection">
           <div class="cs-reflection-label">Reflection</div>
           <p>The thing I am most proud of is not any single app. It is that four separately-built tools feel like one system. The shared palette, type, components, and the <em>_Config</em> and autofill patterns were a deliberate constraint I held myself to, and that constraint is what made the suite learnable for people using it for a few intense days once a year.</p>
-          <p>Building for real operational stress taught me more than any brief could. The users were proctors moving around a room, assessors watching a live discussion, and middle-schoolers who did not know where their files went. Every design decision, one candidate per screen, mandatory sound check, dual-save recordings, offline drafts, had to survive weak networks, small phone screens, and zero training time. Designing for those constraints, rather than for a demo, is where the interesting work was.</p>
+          <p>Building for real operational stress taught me more than any brief could. The users were proctors moving around a room, assessors watching a live discussion, and middle-schoolers who did not know where their files went. Every design decision (one candidate per screen, mandatory sound check, dual-save recordings, offline drafts) had to survive weak networks, small phone screens, and zero training time. Designing for those constraints, rather than for a demo, is where the interesting work was.</p>
           <p>The decision I would defend the hardest is putting configuration in a spreadsheet. It looks unglamorous next to a "real" admin backend, but it did the most important thing: it handed control to the non-technical people who actually run admissions. They can change a PIN, a quota, or an exam name without me. A system that outlives its builder's involvement is, to me, the point of digital transformation.</p>
         </div>
 
