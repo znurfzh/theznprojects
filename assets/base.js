@@ -1,7 +1,38 @@
 /* ============================================================
    theznprojects - base.js
-   Shared across all pages: nav scroll state, scroll reveal
+   Shared across all pages: nav scroll state, scroll reveal,
+   and hamburger menu toggle
    ============================================================ */
+
+// ── Hamburger menu toggle ──────────────────────────────────
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    navToggle.setAttribute('aria-expanded', navToggle.classList.contains('active'));
+  });
+
+  // Close menu when a link is clicked
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', false);
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', false);
+    }
+  });
+}
 
 // ── Nav scroll state ──────────────────────────────────────────
 const nav = document.getElementById('nav');

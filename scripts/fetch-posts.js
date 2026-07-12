@@ -186,6 +186,11 @@ function generatePostHtml(post, content, toc, allPosts) {
 <nav id="nav">
   <div class="nav-inner">
     <a href="/" class="nav-logo"><span class="brand-the">the</span><span class="brand-zn">ZN</span><span class="brand-projects">projects</span></a>
+    <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/work">Work</a></li>
