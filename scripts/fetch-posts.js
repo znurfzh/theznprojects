@@ -191,7 +191,7 @@ function generatePostHtml(post, content, toc, allPosts) {
       <span></span>
       <span></span>
     </button>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-menu">
       <li><a href="/">Home</a></li>
       <li><a href="/work">Work</a></li>
       <li><a href="/megazn" class="active">megaZN</a></li>
